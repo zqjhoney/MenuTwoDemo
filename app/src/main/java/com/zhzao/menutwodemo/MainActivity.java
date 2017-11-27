@@ -69,11 +69,10 @@ public class MainActivity extends BaseActivity {
         f1 = new F1();
         f2 = new F2();
         f3 = new F3();
-        //加载后，选择隐藏
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f1).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f2).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f3).commit();
-
+            //是啊空间大s4444
         getSupportFragmentManager().beginTransaction().show(f1).commit();
         getSupportFragmentManager().beginTransaction().hide(f2).commit();
         getSupportFragmentManager().beginTransaction().hide(f3).commit();
