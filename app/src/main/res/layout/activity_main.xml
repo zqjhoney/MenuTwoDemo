@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhzao.menutwodemo.MainActivity">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/main_head"
+                android:background="@color/bg_title"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.zhzao.menutwodemo.utils.RoundImageView
+                    android:id="@+id/main_left"
+                    android:src="@drawable/raw_1499936862"
+                    android:layout_width="@dimen/x90"
+                    android:layout_height="@dimen/y90" />
+                <TextView
+                    android:id="@+id/title_name"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/x40"
+                    android:layout_centerInParent="true"
+                    android:text="推荐"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_width="@dimen/x90"
+                    android:layout_height="@dimen/y90" />
+            </RelativeLayout>
+            <FrameLayout
+                android:id="@+id/fl"
+                android:layout_below="@+id/main_head"
+                android:layout_above="@+id/main_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+            <RadioGroup
+                android:id="@+id/main_bottom"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:weightSum="3"
+                android:layout_height="@dimen/y110">
+                <RadioButton
+                    android:id="@+id/main_tuijian"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="推荐"
+                    android:button="@null"
+                    android:drawableTop="@drawable/tuijian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/main_duanzi"
+                    android:text="段子"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:drawableTop="@drawable/duanzi"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/main_shipin"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="视频"
+                    android:drawableTop="@drawable/shipin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <include layout="@layout/start"></include>
+        </RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>
