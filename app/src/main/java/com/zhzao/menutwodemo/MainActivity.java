@@ -72,6 +72,7 @@ public class MainActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f1).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f2).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f3).commit();
+//简单注释
             //是啊空间大s4444
         getSupportFragmentManager().beginTransaction().show(f1).commit();
         getSupportFragmentManager().beginTransaction().hide(f2).commit();
