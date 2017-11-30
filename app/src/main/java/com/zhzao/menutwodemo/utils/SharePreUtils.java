@@ -1,8 +1,9 @@
-package com.zzhao.utils.utils;
+package com.zhzao.menutwodemo.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.zhzao.menutwodemo.common.App;
 import com.zzhao.utils.Base.BaseApp;
 
 
@@ -14,7 +15,7 @@ public class SharePreUtils {
     private final static String NAME="comm_name";
 
     public static SharedPreferences getPreferences(){
-        return  BaseApp.mcontext.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        return  App.mContext.getSharedPreferences(NAME, Context.MODE_PRIVATE);
     }
 
     /**

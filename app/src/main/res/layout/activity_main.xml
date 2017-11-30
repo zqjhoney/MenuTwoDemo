@@ -16,11 +16,12 @@
             <RelativeLayout
                 android:id="@+id/main_head"
                 android:background="@color/bg_title"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <com.zhzao.menutwodemo.utils.RoundImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/main_left"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/raw_1499936862"
                     android:layout_width="@dimen/x90"
                     android:layout_height="@dimen/y90" />
@@ -33,10 +34,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:id="@+id/main_right"
                     android:layout_alignParentRight="true"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_width="@dimen/x90"
-                    android:layout_height="@dimen/y90" />
+                    android:src="@drawable/bj"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/x70"
+                    android:layout_height="@dimen/y70" />
             </RelativeLayout>
             <FrameLayout
                 android:id="@+id/fl"

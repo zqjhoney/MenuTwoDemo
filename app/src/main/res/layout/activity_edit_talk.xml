@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhzao.menutwodemo.EditTalkActivity">
+    <RelativeLayout
+        android:id="@+id/edit_head"
+        android:background="@color/bg_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y90">
+        <TextView
+            android:id="@+id/edit_cancle"
+            android:text="〈 取消"
+            android:textSize="@dimen/x36"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_centerVertical="true"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="@dimen/x34"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:text="发表文章"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/edit_public"
+            android:textSize="@dimen/x36"
+            android:layout_centerVertical="true"
+            android:textColor="#fff"
+            android:text="发表"
+            android:layout_marginRight="@dimen/y24"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/edit_content"
+        android:padding="10dp"
+        android:hint="请输入内容，禁止输入色情，暴力等违反国家法律的内容，违者将以封号处理"
+        android:layout_below="@+id/edit_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y460" />
+    <requestFocus></requestFocus>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/editr_ecycle"
+        android:layout_below="@+id/edit_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/y30"
+        android:layout_height="wrap_content" />
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/edit_bar"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

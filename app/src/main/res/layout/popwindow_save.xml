@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+   android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_height="@dimen/x450">
+
+    <TextView
+        android:background="@drawable/tv_head_bg"
+        android:gravity="center"
+        android:text="是否保存到草稿箱"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y85" />
+
+    <TextView
+        android:background="@color/grey_50"
+        android:layout_marginTop="@dimen/y5"
+        android:id="@+id/save_msg"
+        android:gravity="center"
+        android:text="保存"
+        android:textSize="19dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100" />
+
+    <TextView
+        android:layout_marginTop="@dimen/y5"
+        android:background="@color/grey_50"
+        android:id="@+id/discard_msg"
+        android:textSize="19dp"
+        android:gravity="center"
+        android:text="不保存"
+        android:textColor="#f00"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100" />
+    <TextView
+        android:background="@drawable/tv_bg"
+        android:layout_marginTop="@dimen/y30"
+        android:textSize="19dp"
+        android:gravity="center"
+        android:text="取消"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100" />
+</LinearLayout>

@@ -21,7 +21,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:name=".App"
+        android:name=".common.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -45,7 +45,15 @@
             android:name="Mob-AppSecret"
             android:value="c3a62c3cb60bb9830733f3fd709ca0e5" />
 
-        <activity android:name=".WelcomeActivity"></activity>
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/ActivityStyle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         //个推
         <service
             android:name=".service.DemoPushService"
@@ -54,15 +62,14 @@
             android:process=":pushservice" />
         <service android:name=".service.DemoIntentService" />
 
-        <activity android:name=".WelcomePhoneActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Sliding_menuActivity"></activity>
+        <activity
+            android:name=".WelcomePhoneActivity"
+            android:theme="@style/ActivityStyle" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Sliding_menuLeftActivity" />
+        <activity android:name=".Sliding_menuRightActivity" />
+        <activity android:name=".EditTalkActivity" />
+        <activity android:name=".EditOverActivity"></activity>
     </application>
 
 </manifest>

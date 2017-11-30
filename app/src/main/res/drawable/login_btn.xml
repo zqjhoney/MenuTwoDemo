@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <size android:width="@dimen/x500" android:height="@dimen/y67"></size>
+    <size android:width="@dimen/x550" android:height="@dimen/y67"></size>
     <corners android:radius="15dp"></corners>
     <solid android:color="@color/login_btn"></solid>
 </shape>

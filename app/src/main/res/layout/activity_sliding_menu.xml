@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_bg"
-    tools:context="com.zhzao.menutwodemo.Sliding_menuActivity">
+    tools:context="com.zhzao.menutwodemo.Sliding_menuLeftActivity">
 <RelativeLayout
     android:id="@+id/menu_head"
     android:background="@color/bg_title"
@@ -13,6 +13,7 @@
     android:layout_height="@dimen/y100">
 
     <TextView
+        android:id="@+id/back_back"
         android:text="〈 返回"
         android:textSize="@dimen/x34"
         android:layout_marginLeft="@dimen/x20"
@@ -37,7 +38,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
             <RelativeLayout
-
+                android:id="@+id/versionCode_check"
+                android:clickable="true"
+                android:background="@drawable/waterview_item"
                 android:paddingLeft="@dimen/x20"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x100">
@@ -73,7 +76,9 @@
                 android:background="@color/bg_bg"
                 ></View>
         <RelativeLayout
-
+            android:id="@+id/idea_back"
+            android:clickable="true"
+            android:background="@drawable/waterview_item"
             android:paddingLeft="@dimen/x20"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x100">
@@ -102,7 +107,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
-
+            android:id="@+id/about_project"
+            android:clickable="true"
+            android:background="@drawable/waterview_item"
             android:paddingLeft="@dimen/x20"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x100">
@@ -129,7 +136,9 @@
             android:background="@color/bg_bg"
             ></View>
         <RelativeLayout
-
+            android:id="@+id/clear_cache"
+            android:clickable="true"
+            android:background="@drawable/waterview_item"
             android:paddingLeft="@dimen/x20"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x100">

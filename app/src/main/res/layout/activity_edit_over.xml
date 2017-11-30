@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhzao.menutwodemo.EditOverActivity">
+    <RelativeLayout
+        android:id="@+id/menu_head"
+        android:background="@color/bg_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+        <TextView
+            android:id="@+id/over_cancle"
+            android:text="〈 返回"
+            android:textSize="@dimen/x34"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_centerVertical="true"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_t"
+        android:layout_centerHorizontal="true"
+        android:layout_width="55dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/raw_1500021052"
+        android:layout_height="55dp" />
+    <TextView
+        android:id="@+id/over_content"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/image_t"
+        android:textSize="16dp"
+        android:text="发表成功，快分享给好友捧场吧~！"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/over_three"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/over_content"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/i1"
+            android:src="@drawable/qq"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:text="QQ好友"
+                android:layout_below="@+id/i1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginLeft="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/i2"
+                android:src="@drawable/raw_1500022686"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:text="QQ空间"
+                android:layout_below="@+id/i2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginLeft="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/i3"
+                android:src="@drawable/raw_1500022317"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:text="朋友圈"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/i3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginLeft="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/i4"
+                android:src="@drawable/weixin"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:text="微信"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/i4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/go_look"
+        android:text="前往看看！！！"
+        android:background="@drawable/go_talk"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/over_three"
+        android:layout_marginTop="40dp"
+        android:textColor="#fff"
+        android:layout_width="@dimen/y470"
+        android:layout_height="@dimen/y79" />
+
+</RelativeLayout>

@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.umeng.analytics.MobclickAgent;
+import com.zzhao.utils.R;
+
+import butterknife.ButterKnife;
 
 
 /**
@@ -18,14 +21,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
+        setFull(isFull());
         initview();
         initdata();
-        toastShow();
 
     }
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
+
+    public void setFull(boolean hasFocus){
         if (hasFocus && Build.VERSION.SDK_INT >= 19) {
             View decorView = getWindow().getDecorView();
             decorView.setSystemUiVisibility(
@@ -38,10 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    public abstract Boolean isFull();//添加布局
     public abstract int getLayout();//添加布局
     public abstract void initview();//加载控件
     public abstract void initdata();//添加数据
-    public abstract void toastShow();//展示吐司
     public abstract void setClick(View view);//点击事件
 
     @Override

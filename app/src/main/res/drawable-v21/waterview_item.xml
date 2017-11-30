@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ripple 是5.0才出现的新标签-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorAccent">
+    <item
+        android:id="@android:id/mask"
+        android:drawable="@drawable/item_color"/>
+</ripple>

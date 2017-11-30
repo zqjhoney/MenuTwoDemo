@@ -1,19 +1,28 @@
 package com.zhzao.menutwodemo;
-import com.igexin.sdk.PushManager;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.igexin.sdk.PushManager;
 import com.zhzao.menutwodemo.service.DemoIntentService;
 import com.zhzao.menutwodemo.service.DemoPushService;
 import com.zzhao.utils.Base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class WelcomeActivity extends BaseActivity {
 
-    private TextView other;
+
+    @BindView(R.id.other)
+    TextView other;
+
+    @Override
+    public Boolean isFull() {
+        return true;
+    }
 
     @Override
     public int getLayout() {
@@ -22,12 +31,10 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void initview() {
+        ButterKnife.bind(this);
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoPushService.class);
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
-        other= findViewById(R.id.other);
         other.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -36,17 +43,13 @@ public class WelcomeActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void toastShow() {
-
-    }
 
     @Override
     public void setClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.other:
-                startActivity(new Intent(this,WelcomePhoneActivity.class));
+                startActivity(new Intent(this, WelcomePhoneActivity.class));
                 break;
         }
     }
@@ -70,4 +73,6 @@ public class WelcomeActivity extends BaseActivity {
     public void hideLoading() {
 
     }
+
+
 }

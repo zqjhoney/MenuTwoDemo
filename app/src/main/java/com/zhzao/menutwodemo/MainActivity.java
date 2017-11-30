@@ -21,6 +21,8 @@ import com.zzhao.utils.Base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
 
@@ -47,9 +49,14 @@ public class MainActivity extends BaseActivity {
     TextView titleName;
     @BindView(R.id.wenjian)
     ImageView wenjian;
+    @BindView(R.id.main_right)
+    ImageView mainRight;
+    @BindView(R.id.start_photo)
+    CircleImageView startPhoto;
     private F1 f1;
     private F2 f2;
     private F3 f3;
+    private Unbinder bind;
 
     @Override
     public int getLayout() {
@@ -58,13 +65,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initview() {
-        ButterKnife.bind(this);
+        bind = ButterKnife.bind(this);
         changeImageSize();
+        boolean pageboolean = getIntent().getBooleanExtra("page", false);
         mainShipin.setOnClickListener(this);
         mainTuijian.setOnClickListener(this);
         mainDuanzi.setOnClickListener(this);
         mainLeft.setOnClickListener(this);
         shezhi.setOnClickListener(this);
+        mainRight.setOnClickListener(this);
+        startPhoto.setOnClickListener(this);
 
         f1 = new F1();
         f2 = new F2();
@@ -72,26 +82,25 @@ public class MainActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f1).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f2).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.fl, f3).commit();
-//简单注释
-            //是啊空间大s4444
-        getSupportFragmentManager().beginTransaction().show(f1).commit();
-        getSupportFragmentManager().beginTransaction().hide(f2).commit();
-        getSupportFragmentManager().beginTransaction().hide(f3).commit();
-
-
+        if (pageboolean) {
+            getSupportFragmentManager().beginTransaction().show(f2).commit();
+            getSupportFragmentManager().beginTransaction().hide(f1).commit();
+            getSupportFragmentManager().beginTransaction().hide(f3).commit();
+            mainDuanzi.setTextColor(Color.BLUE);
+            mainDuanzi.setChecked(true);
+        } else {
+            getSupportFragmentManager().beginTransaction().show(f1).commit();
+            getSupportFragmentManager().beginTransaction().hide(f2).commit();
+            getSupportFragmentManager().beginTransaction().hide(f3).commit();
+            mainTuijian.setTextColor(Color.BLUE);
+            mainTuijian.setChecked(true);
+        }
     }
 
     @Override
     public void initdata() {
-        mainTuijian.setTextColor(Color.BLUE);
-        mainTuijian.setChecked(true);
-
     }
 
-    @Override
-    public void toastShow() {
-
-    }
 
     @Override
     public void setClick(View view) {
@@ -130,7 +139,13 @@ public class MainActivity extends BaseActivity {
                 drawerLayout.openDrawer(Gravity.LEFT);
                 break;
             case R.id.shezhi://设置
-                startActivity(new Intent(this, Sliding_menuActivity.class));
+                startActivity(new Intent(this, Sliding_menuLeftActivity.class));
+                break;
+            case R.id.main_right:
+                startActivity(new Intent(this, Sliding_menuRightActivity.class));
+                break;
+            case R.id.start_photo:
+                startActivity(new Intent(this, WelcomeActivity.class));
                 break;
 
         }
@@ -174,4 +189,21 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public Boolean isFull() {
+        return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
+    }
 }
