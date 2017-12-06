@@ -3,42 +3,55 @@
     android:layout_width="match_parent"
    android:layout_centerHorizontal="true"
     android:orientation="vertical"
+    android:background="@android:color/transparent"
     android:gravity="center_horizontal"
-    android:layout_height="@dimen/x450">
-
+    android:layout_height="match_parent">
     <TextView
-        android:background="@drawable/tv_head_bg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#E8E8E8"
         android:gravity="center"
         android:text="是否保存到草稿箱"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y85" />
+        android:textSize="18sp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#C9C9CB" />
     <TextView
-        android:background="@color/grey_50"
-        android:layout_marginTop="@dimen/y5"
         android:id="@+id/save_msg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#E8E8E8"
         android:gravity="center"
         android:text="保存"
-        android:textSize="19dp"
+        android:textSize="18sp" />
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y100" />
+        android:layout_height="1px"
+        android:background="#C9C9CB" />
 
     <TextView
-        android:layout_marginTop="@dimen/y5"
-        android:background="@color/grey_50"
         android:id="@+id/discard_msg"
-        android:textSize="19dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#E8E8E8"
         android:gravity="center"
         android:text="不保存"
         android:textColor="#f00"
+        android:textSize="18sp" />
+    <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y100" />
+        android:layout_height="1px"
+        android:background="#C9C9CB" />
     <TextView
-        android:background="@drawable/tv_bg"
-        android:layout_marginTop="@dimen/y30"
-        android:textSize="19dp"
+        android:layout_marginTop="@dimen/y50"
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#E8E8E8"
         android:gravity="center"
         android:text="取消"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y100" />
+        android:textSize="18sp" />
 </LinearLayout>

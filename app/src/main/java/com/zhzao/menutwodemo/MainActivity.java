@@ -14,9 +14,13 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.zhzao.menutwodemo.common.App;
 import com.zhzao.menutwodemo.fragment.F1;
 import com.zhzao.menutwodemo.fragment.F2;
 import com.zhzao.menutwodemo.fragment.F3;
+import com.zhzao.menutwodemo.utils.MapUtils;
+import com.zhzao.menutwodemo.utils.SharePreUtils;
 import com.zzhao.utils.Base.BaseActivity;
 
 import butterknife.BindView;
@@ -39,8 +43,6 @@ public class MainActivity extends BaseActivity {
     RadioButton mainShipin;
     @BindView(R.id.main_bottom)
     RadioGroup mainBottom;
-    @BindView(R.id.main_left)
-    ImageView mainLeft;
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
     @BindView(R.id.shezhi)
@@ -53,6 +55,10 @@ public class MainActivity extends BaseActivity {
     ImageView mainRight;
     @BindView(R.id.start_photo)
     CircleImageView startPhoto;
+    @BindView(R.id.main_left)
+    CircleImageView mainLeft;
+    @BindView(R.id.start_name)
+    TextView startName;
     private F1 f1;
     private F2 f2;
     private F3 f3;
@@ -66,6 +72,8 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initview() {
         bind = ButterKnife.bind(this);
+        String sha1 = MapUtils.getSHA1(this);
+        System.out.println("xxxx"+sha1);
         changeImageSize();
         boolean pageboolean = getIntent().getBooleanExtra("page", false);
         mainShipin.setOnClickListener(this);
@@ -99,6 +107,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initdata() {
+        String icon = SharePreUtils.getShareprefervalue("icon");
+        String name = SharePreUtils.getShareprefervalue("knname");
+        if (icon != null) {
+            Glide.with(this).load(icon).into(mainLeft);
+            Glide.with(this).load(icon).into(startPhoto);
+            startName.setText(name);
+        }
     }
 
 
@@ -145,7 +160,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, Sliding_menuRightActivity.class));
                 break;
             case R.id.start_photo:
-                startActivity(new Intent(this, WelcomeActivity.class));
+                startActivity(new Intent(this, Per_Msg_Activity.class));
                 break;
 
         }

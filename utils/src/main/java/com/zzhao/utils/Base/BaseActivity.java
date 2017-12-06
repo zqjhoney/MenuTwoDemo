@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.umeng.analytics.MobclickAgent;
 import com.zzhao.utils.R;
@@ -27,6 +29,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     }
 
+
+
     public void setFull(boolean hasFocus){
         if (hasFocus && Build.VERSION.SDK_INT >= 19) {
             View decorView = getWindow().getDecorView();
@@ -37,6 +41,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
 

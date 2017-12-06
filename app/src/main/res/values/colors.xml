@@ -24,4 +24,6 @@
     <color name="color_c51">#f94c51</color>
     <color name="color_green">#43c117</color>
 
+    <color name="video_bt">#A2DEFA</color>
+    <color name="video_colorselect">#8DA1F0</color>
 </resources>

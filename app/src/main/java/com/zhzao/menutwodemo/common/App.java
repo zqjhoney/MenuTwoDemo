@@ -2,17 +2,22 @@ package com.zhzao.menutwodemo.common;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.zhzao.menutwodemo.BuildConfig;
+import com.zhzao.menutwodemo.MainActivity;
+import com.nanchen.crashmanager.CrashApplication;
+import com.nanchen.crashmanager.UncaughtExceptionHandlerImpl;
 
 /**
  * Created by 张乔君 on 2017/11/23.
  */
 
-public class App extends Application {
+public class App extends MultiDexApplication {
    public static Context mContext;
     @Override
     public void onCreate() {
@@ -28,6 +33,11 @@ public class App extends Application {
                 .logLevel(LogLevel.NONE)        // 是否显示Log 默认：LogLevel.FULL（全部显示）
                 .methodOffset(2) ;              // 默认：0
          //       .logAdapter(new AndroidLogAdapter()); //可以自己构造适配器默认：AndroidLogAdapter
+
+        //崩溃要重启的
+     //   UncaughtExceptionHandlerImpl.getInstance().init(this, BuildConfig.DEBUG, true, 0, MainActivity.class);
+       // 禁止重启
+        // UncaughtExceptionHandlerImpl.getInstance().init(this,BuildConfig.DEBUG);
 
     }
 }

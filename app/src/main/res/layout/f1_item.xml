@@ -120,15 +120,15 @@
         android:layout_height="wrap_content" />
 
     <RelativeLayout
+        android:id="@+id/all_rl"
         android:layout_marginTop="@dimen/y15"
         android:layout_below="@+id/host_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y380">
-        <ImageView
-            android:scaleType="centerCrop"
-            android:src="@drawable/huanghun"
+        <include
+            layout="@layout/simple_player_view_player"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y380" />
+            android:layout_height="@dimen/y380"/>
         <LinearLayout
             android:layout_marginRight="@dimen/x10"
             android:layout_alignParentRight="true"
@@ -136,43 +136,51 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
             <ImageView
-                android:src="@drawable/sex"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y60" />
+                android:id="@+id/attention_iv"
+                android:background="@drawable/attention"
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/y50" />
             <TextView
+                android:id="@+id/attention_tv"
                 android:text="1234"
                 android:textColor="#fff"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y30" />
             <ImageView
+                android:id="@+id/collect_iv"
                 android:layout_marginTop="@dimen/y6"
-                android:src="@drawable/sex"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y60" />
+                android:background="@drawable/collect"
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/y50" />
             <TextView
+                android:id="@+id/collect_tv"
                 android:text="1234"
                 android:textColor="#fff"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y30" />
             <ImageView
+                android:id="@+id/share_iv"
                 android:layout_marginTop="@dimen/y6"
-                android:src="@drawable/sex"
-                android:layout_width="match_parent"
+                android:src="@drawable/fx2"
+                android:layout_width="@dimen/x80"
                 android:layout_height="@dimen/y60" />
             <TextView
+                android:id="@+id/share_tv"
                 android:text="1234"
                 android:textColor="#fff"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y30" />
             <ImageView
+                android:id="@+id/review_iv"
                 android:layout_marginTop="@dimen/y6"
-                android:src="@drawable/sex"
-                android:layout_width="match_parent"
+                android:src="@drawable/ly"
+                android:layout_width="@dimen/x80"
                 android:layout_height="@dimen/y60" />
             <TextView
+                android:id="@+id/review_tv"
                 android:text="1234"
                 android:textColor="#fff"
                 android:gravity="center"

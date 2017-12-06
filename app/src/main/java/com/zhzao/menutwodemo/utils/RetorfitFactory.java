@@ -1,7 +1,6 @@
 package com.zhzao.menutwodemo.utils;
 
-
-
+import android.os.Environment;
 
 import com.google.gson.Gson;
 import com.zhzao.menutwodemo.common.Api;
@@ -9,8 +8,10 @@ import com.zhzao.menutwodemo.service.RetrofitHttpService;
 import com.zhzao.menutwodemo.trustbooks.TrustAllCerts;
 import com.zhzao.menutwodemo.trustbooks.TrustAllHostnameVerifier;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +25,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Cache;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -41,17 +45,22 @@ public class RetorfitFactory {
     private static RetorfitFactory httpUtils;
     private final Retrofit mRetrofit;
     private static Gson gson;
+    private static final long cacheSize = 1024 * 1024 * 20;// 缓存文件最大限制大小20M
+    private static String cacheDirectory = Environment.getExternalStorageDirectory() + "/okttpcaches"; // 设置缓存文件路径
+    private static Cache cache = new Cache(new File(cacheDirectory), cacheSize);  //
 
     private RetorfitFactory() {
+
         OkHttpClient mOkHttpClient=new OkHttpClient.Builder()
-                .connectTimeout(6000, TimeUnit.SECONDS)
-                .readTimeout(6000, TimeUnit.SECONDS)
-                .writeTimeout(6000, TimeUnit.SECONDS)
+                .connectTimeout(60000, TimeUnit.SECONDS)
+                .readTimeout(60000, TimeUnit.SECONDS)
+                .writeTimeout(60000, TimeUnit.SECONDS)
                // .addInterceptor(InterceptorUtil.HeaderInterceptor())
                 .sslSocketFactory(createSSLSocketFactory())
                 .hostnameVerifier(new TrustAllHostnameVerifier())
                 .retryOnConnectionFailure(false)
-                .addInterceptor(new LogInterceptor())//添加日志拦截器
+              //  .cache(cache)
+                .addInterceptor(new MyIntercepter())//添加日志拦截器
                 .build();
         //添加gson转换器
         //添加rxjava转换器
@@ -77,7 +86,7 @@ public class RetorfitFactory {
     }
 
 
-    //得到Observer
+    //多个参数得到Observer
     public void getObserver(String path, Map<String,String> map,Observer<ResponseBody> observer){
         if(map!=null && map.size()>0){//走post请求
             RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
@@ -97,7 +106,7 @@ public class RetorfitFactory {
         }
     }
     //实例成对象回调回去
-    //得到Observer
+    //多个参数得到自己的回调接口Callback
     public void getObserver(String path, Map<String,String> map, final MyCallback callback){
         if(map!=null && map.size()>0){//走post请求
             RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
@@ -158,7 +167,24 @@ public class RetorfitFactory {
                     });
         }
     }
-    //得到consumer
+    //多个参数得到consumer
+    public void getConsumer(String path, Map<String,String> map, Consumer<ResponseBody> consumer){
+        if(map!=null && map.size()>0)
+        {
+            RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
+            service.requestPost(path,map)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(consumer);
+        }else{
+            RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
+            service.RequestGet(path)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(consumer);
+        }
+    }
+    //多个参数得到自己的Callback
     public void getConsumer(String path, Map<String,String> map, final MyCallback callback){
         if(map!=null && map.size()>0)
         {
@@ -191,12 +217,20 @@ public class RetorfitFactory {
                     });
         }
     }
-    //上传头像
-    public void uploadConsumer(String path, Map<String,Object> map, Consumer<ResponseBody> consumer){
+    //单文件单参数得到consumer
+    public void uploadConsumer(String path, List<MultipartBody.Part> part, Consumer<ResponseBody> consumer){
+            RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
+            service.upSignLoad(path,part)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(consumer);
+    }
+    //多文件多参数得到consumer
+    public void uploadConsumer(String path, Map<String, RequestBody> map, List<MultipartBody.Part> list, Consumer<ResponseBody> consumer){
         if(map!=null && map.size()>0)
         {
             RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
-            service.upLoad(path,map)
+            service.upLoad(path,map,list)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(consumer);

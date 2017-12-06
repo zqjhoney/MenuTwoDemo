@@ -62,7 +62,6 @@ public class WelcomePhoneActivity extends BaseActivity implements PhoneView {
 
     @Override
     public void initdata() {
-
     }
 
 
@@ -88,10 +87,16 @@ public class WelcomePhoneActivity extends BaseActivity implements PhoneView {
         User user = gson.fromJson(msg, User.class);
         String token = user.getData().getToken();
         String code=user.getCode();
-        int uid=user.getData().getUid();
+        int uid=user.getData().getUid();//uid
+        String name=user.getData().getUsername();//用户名
+        String knname=user.getData().getNickname();
+        String icon=user.getData().getIcon();//头像
     if("0".equals(code)){//成功
         SharePreUtils.putShareprefer("token", token);
         SharePreUtils.putShareprefer("uid",uid+"");
+        SharePreUtils.putShareprefer("icon",icon);
+        SharePreUtils.putShareprefer("name",name);
+        SharePreUtils.putShareprefer("knname",knname);
         if(b){
             finish();
         }else{

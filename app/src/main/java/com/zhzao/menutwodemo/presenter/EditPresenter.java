@@ -5,17 +5,25 @@ import android.text.TextUtils;
 import com.zhzao.menutwodemo.common.Api;
 import com.zhzao.menutwodemo.modle.EditModle;
 import com.zhzao.menutwodemo.utils.MyCallback;
+import com.zhzao.menutwodemo.utils.SharePreUtils;
 import com.zhzao.menutwodemo.view.EditView;
 import com.zzhao.utils.Base.BasePresenter;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 /**
@@ -25,7 +33,8 @@ import okhttp3.ResponseBody;
 public class EditPresenter extends BasePresenter<EditView> {
     private EditModle modle;
     private EditView view;
-    private final Map<String, String> map;
+    private final Map<String, RequestBody> map;
+    private ArrayList<MultipartBody.Part> bodylist;
 
     public EditPresenter(EditView view) {
         super(view);
@@ -35,40 +44,46 @@ public class EditPresenter extends BasePresenter<EditView> {
     }
 
 
-    public void editMsg(String msg,String uid){
+    public void editMsg(String msg, String uid, ArrayList<File> files){
         if(TextUtils.isEmpty(msg)){
                 view.toast("内容不能为空");
                 return;
         }
         view.showLoading();
-        map.put("uid",uid);
-        map.put("content",msg);
-        modle.getEditMsg(Api.PUBLIC, map, new Observer<ResponseBody>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
+        bodylist = new ArrayList<>();
+        if(files!=null && files.size()>0){
+            for (File file : files) {
+                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                MultipartBody.Part filePart = MultipartBody.Part.createFormData("jokeFiles", file.getName(), requestFile);
+                bodylist.add(filePart);
             }
+        }
+        RequestBody msgBody = RequestBody.create(MediaType.parse("multipart/form-data"), msg);
+        RequestBody uidBody = RequestBody.create(MediaType.parse("multipart/form-data"), uid);
+//        RequestBody sour = RequestBody.create(MediaType.parse("multipart/form-data"), "android");
+//        RequestBody app = RequestBody.create(MediaType.parse("multipart/form-data"), "101");
+//        RequestBody tok = RequestBody.create(MediaType.parse("multipart/form-data"), SharePreUtils.getShareprefervalue("token"));
+        map.put("content", msgBody);//添加参数
+        map.put("uid",uidBody);//添加参数
+//        map.put("token",tok);
+//        map.put("source",sour);
+//        map.put("appVersion",app);
 
+        modle.getEditMsg(Api.PUBLIC, map, bodylist, new Consumer<ResponseBody>() {
             @Override
-            public void onNext(ResponseBody value) {
+            public void accept(ResponseBody responseBody) throws Exception {
                 try {
                     view.hideLoading();
-                    view.success(value.string());
+                    view.success(responseBody.string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
-            @Override
-            public void onError(Throwable e) {
-                view.hideLoading();
-                Logger.getLogger("EditPresenter:s"+"异常"+e);
-            }
-
-            @Override
-            public void onComplete() {
-            }
         });
 
+
+//
+//        view.hideLoading();
+//        Logger.getLogger("EditPresenter:s"+"异常"+e);
     }
 }

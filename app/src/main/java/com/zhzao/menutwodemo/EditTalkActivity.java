@@ -36,6 +36,7 @@ import com.zzhao.utils.utils.ToastShow;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class EditTalkActivity extends BaseActivity implements EditView {
     private GridImageAdapter adapter;
     private List<LocalMedia> selectList = new ArrayList<>();
     private int maxSelectNum = 9;
+    private ArrayList<File> filelist;
 
     @Override
     public Boolean isFull() {
@@ -97,6 +99,7 @@ public class EditTalkActivity extends BaseActivity implements EditView {
         mPopupWindow.setTouchable(true);
         mPopupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));//设置背景透明
         mPopupWindow.setOutsideTouchable(true);//设置点击外边取消
+
         TextView save = pop.findViewById(R.id.save_msg);
         TextView discard = pop.findViewById(R.id.discard_msg);
         save.setOnClickListener(this);
@@ -104,6 +107,7 @@ public class EditTalkActivity extends BaseActivity implements EditView {
         //显示PopupWindow
         rootview = LayoutInflater.from(this).inflate(R.layout.activity_edit_talk, null);
         params = getWindow().getAttributes();//设置背景半透明
+        //当pop结束时，半透明恢复
         mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -149,7 +153,6 @@ public class EditTalkActivity extends BaseActivity implements EditView {
             }
         });
 
-
         adapter.setOnItemClickListener(new GridImageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View v) {
@@ -194,11 +197,15 @@ public class EditTalkActivity extends BaseActivity implements EditView {
                     jumpActivity();//重新登录
                 }
                 String msg = editContent.getText().toString();
-                //todo 图片
-                presenter.editMsg(msg, uid);
+                //处理图片
+                filelist = new ArrayList<>();
+                for (LocalMedia media : selectList) {
+                    File file=new File(media.getPath());
+                    filelist.add(file);
+                }
+                presenter.editMsg(msg, uid,filelist);//传递图片
                 backkeys();
                 break;
-
             case R.id.save_msg://保存
                 ToastShow.showToast(this, "保存");
                 mPopupWindow.dismiss();
@@ -208,7 +215,6 @@ public class EditTalkActivity extends BaseActivity implements EditView {
                 mPopupWindow.dismiss();
                 break;
         }
-
     }
 
     private void backkeys() {
@@ -246,7 +252,7 @@ public class EditTalkActivity extends BaseActivity implements EditView {
                 startActivity(new Intent(this, EditOverActivity.class));
             } else {//失败重新登录
                 toast(m);
-                jumpActivity();
+                //jumpActivity();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -273,13 +279,7 @@ public class EditTalkActivity extends BaseActivity implements EditView {
         ToastShow.showToast(this, msg);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.disPatch();
-        bind.unbind();
 
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -307,6 +307,7 @@ public class EditTalkActivity extends BaseActivity implements EditView {
             }
         }
     }
+
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick() {
@@ -338,7 +339,7 @@ public class EditTalkActivity extends BaseActivity implements EditView {
                     .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
                     .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .openClickSound(false)// 是否开启点击声音 true or false
-                    // .selectionMedia()// 是否传入已选图片 List<LocalMedia> list
+                     .selectionMedia(selectList)// 是否传入已选图片 List<LocalMedia> list
                     .previewEggs(false)// 预览图片时 是否增强左右滑动图片体验(图片滑动一半即可看到上一张是否选中) true or false
                     // .cropCompressQuality()// 裁剪压缩质量 默认90 int
                     .minimumCompressSize(100)// 小于100kb的图片不压缩
@@ -355,4 +356,10 @@ public class EditTalkActivity extends BaseActivity implements EditView {
         }
 
     };
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.disPatch();
+        bind.unbind();
+    }
 }

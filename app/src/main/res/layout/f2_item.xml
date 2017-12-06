@@ -38,6 +38,7 @@
             android:layout_height="wrap_content" />
 
         <ImageView
+            android:id="@+id/show_ic"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/icon_open"
@@ -53,5 +54,11 @@
         android:maxLines="8"
         android:textSize="18dp"
         android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/talk_content"
+        android:id="@+id/gv_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

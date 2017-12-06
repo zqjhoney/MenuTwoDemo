@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <ProgressBar
-        android:layout_centerInParent="true"
-        android:id="@+id/f_bar"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/f1_wait"
+        android:src="@drawable/t"
         android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_centerInParent="true"
+        android:layout_width="@dimen/x350"
+        android:layout_height="@dimen/y350" />
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xRecyclerView"
         android:layout_width="match_parent"

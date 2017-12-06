@@ -3,10 +3,13 @@ package com.zhzao.menutwodemo.modle;
 import com.zhzao.menutwodemo.utils.MyCallback;
 import com.zhzao.menutwodemo.utils.RetorfitFactory;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observer;
 import io.reactivex.functions.Consumer;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 /**
@@ -15,7 +18,7 @@ import okhttp3.ResponseBody;
 
 public class EditModle {
 
-    public void getEditMsg(String path, Map<String,String> map, Observer<ResponseBody> observer){
-        RetorfitFactory.getInstance().getObserver(path,map,observer);
+    public void getEditMsg(String path,Map<String, RequestBody> map, List<MultipartBody.Part> list, Consumer<ResponseBody> consumer){
+        RetorfitFactory.getInstance().uploadConsumer(path,map,list,consumer);
     }
 }

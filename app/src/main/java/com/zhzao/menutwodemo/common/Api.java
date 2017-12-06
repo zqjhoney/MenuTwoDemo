@@ -10,6 +10,15 @@ public class Api {
     public static final String Talk_URL="quarter/getJokes";//获取//https://www.zhaoapi.cn/quarter/getJokes
     public static final String REGISTER="user/login";//注册
     public static final String PUBLIC="quarter/publishJoke";//发表
+    public static final String GET_PerMsg="user/getUserInfo";//获取用户信息
+    public static final String UP_Photo="file/upload";//上传头像
+    public static final String VIDEO_PUBLIC="quarter/publishVideo";//上传视频
+    public static final String VIDEO_GET="quarter/getVideos";//获取视频
+    public static final String HTTP="http://120.27.23.105";//获取视频
+
+
+
+
 
 
 

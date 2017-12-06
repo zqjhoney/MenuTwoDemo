@@ -39,8 +39,6 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void initdata() {
-
-
     }
 
 
@@ -50,6 +48,7 @@ public class WelcomeActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.other:
                 startActivity(new Intent(this, WelcomePhoneActivity.class));
+                finish();
                 break;
         }
     }

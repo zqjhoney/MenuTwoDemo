@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="#fff"
+    android:clickable="true"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -20,6 +21,7 @@
         <TextView
             android:textSize="@dimen/x45"
             android:text="奶茶"
+            android:id="@+id/start_name"
             android:layout_marginLeft="@dimen/x80"
             android:textColor="#fff"
             android:layout_marginBottom="@dimen/y100"

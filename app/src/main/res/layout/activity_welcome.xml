@@ -80,7 +80,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="其他登录方式"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:gravity="center"
+        android:layout_width="@dimen/x290"
+        android:layout_height="@dimen/y100" />
 
 </RelativeLayout>

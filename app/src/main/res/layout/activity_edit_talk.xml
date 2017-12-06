@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zhzao.menutwodemo.EditTalkActivity">
+    <!--android:fitsSystemWindows="true"-->
+    <!--android:clipToPadding="true" -->
     <RelativeLayout
         android:id="@+id/edit_head"
         android:background="@color/bg_title"

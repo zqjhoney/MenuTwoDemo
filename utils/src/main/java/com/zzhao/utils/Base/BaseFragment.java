@@ -1,6 +1,5 @@
 package com.zzhao.utils.Base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -45,6 +44,12 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if(mRootView==null){
             mRootView = View.inflate(mActivity,setLayoutView(),null);
                    // inflater.inflate(setLayoutView(), container, false);
+        }
+            // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
+        ViewGroup parent = (ViewGroup) mRootView.getParent();
+        if (parent != null)
+        {
+            parent.removeView(mRootView);
         }
         bind = ButterKnife.bind(this, mRootView);
         return mRootView;

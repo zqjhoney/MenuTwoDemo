@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.zhzao.menutwodemo.MainActivity">
+
+    <!--android:fitsSystemWindows="true"-->
+    <!--android:clipToPadding="true" -->
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerLayout"
@@ -15,27 +19,30 @@
             android:layout_height="match_parent">
             <RelativeLayout
                 android:id="@+id/main_head"
-                android:background="@color/bg_title"
+                android:paddingTop="29dp"
+                android:background="#f00"
                 android:padding="6dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/y120">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/main_left"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/raw_1499936862"
-                    android:layout_width="@dimen/x90"
-                    android:layout_height="@dimen/y90" />
+                    android:layout_width="@dimen/x77"
+                    android:layout_height="@dimen/y77" />
                 <TextView
                     android:id="@+id/title_name"
                     android:textColor="#fff"
                     android:textSize="@dimen/x40"
-                    android:layout_centerInParent="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:text="推荐"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ImageView
                     android:id="@+id/main_right"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/bj"
                     android:layout_centerVertical="true"
                     android:layout_width="@dimen/x70"
@@ -88,7 +95,7 @@
             android:layout_gravity="start"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-                <include layout="@layout/start"></include>
+           <include layout="@layout/start"></include>
         </RelativeLayout>
     </android.support.v4.widget.DrawerLayout>
 

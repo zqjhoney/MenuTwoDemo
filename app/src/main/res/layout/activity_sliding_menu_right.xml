@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:background="@drawable/huanghun"
     android:layout_height="match_parent">
+    <!--android:fitsSystemWindows="true"-->
+    <!--android:clipToPadding="true" -->
     <RelativeLayout
         android:id="@+id/menu_head"
         android:background="@color/bg_title"

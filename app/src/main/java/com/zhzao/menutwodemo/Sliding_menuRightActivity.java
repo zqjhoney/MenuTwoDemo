@@ -48,7 +48,7 @@ public class Sliding_menuRightActivity extends BaseActivity {
 
         switch (view.getId()) {
             case R.id.video_Msg:
-
+                startActivity(new Intent(this, Video_EditActivity.class));
                 break;
             case R.id.talk_Msg:
                 startActivity(new Intent(this, EditTalkActivity.class));
