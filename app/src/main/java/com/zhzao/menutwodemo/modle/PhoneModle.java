@@ -18,7 +18,6 @@ public class PhoneModle{
 
     //规定都是post请求方法
     public void login(String path,  Map<String, String> map, Observer<ResponseBody> observer) {
-
         RetorfitFactory retorfitFactory = RetorfitFactory.getInstance();
         retorfitFactory.getObserver(path,map,observer);
 

@@ -36,14 +36,14 @@
             android:text="2017-05-23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/show_ic"
+        <com.zhzao.menutwodemo.view.ShowView
+            android:id="@+id/showview"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/icon_open"
-            android:layout_width="@dimen/x74"
-            android:layout_height="@dimen/y74" />
+            android:layout_width="@dimen/x430"
+            android:layout_height="wrap_content">
+
+        </com.zhzao.menutwodemo.view.ShowView>
     </RelativeLayout>
     <TextView
         android:id="@+id/talk_content"

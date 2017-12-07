@@ -1,7 +1,6 @@
 package com.zhzao.menutwodemo;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,6 +31,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void initview() {
         ButterKnife.bind(this);
+    //    setTheme(R.style.ActivityStyle);
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoPushService.class);
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
         other.setOnClickListener(this);

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x420"
+    android:layout_gravity="right"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/view1"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/y115">
+        <ImageView
+            android:id="@+id/msm_iv"
+            android:src="@drawable/d_dx"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y70" />
+        <TextView
+            android:id="@+id/msm_tv"
+            android:textSize="@dimen/x25"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/host_open3"
+            android:text="1244"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/view2"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/x105"
+        android:layout_height="@dimen/y115">
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/show_iv"
+            android:src="@drawable/d_fx"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y70" />
+        <TextView
+            android:id="@+id/show_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/show_iv"
+            android:text="123"
+            android:textSize="@dimen/x23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/view3"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/x80"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="@dimen/y115">
+        <ImageView
+            android:id="@+id/like_iv"
+            android:src="@drawable/d_xx"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y70" />
+        <TextView
+            android:id="@+id/like_tv"
+            android:textSize="@dimen/x25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/like_iv"
+            android:layout_centerHorizontal="true"
+            android:text="332" />
+    </RelativeLayout>
+    <ImageView
+
+        android:id="@+id/view"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/icon_open"
+        android:layout_width="@dimen/x70"
+        android:layout_height="@dimen/y70" />
+</RelativeLayout>

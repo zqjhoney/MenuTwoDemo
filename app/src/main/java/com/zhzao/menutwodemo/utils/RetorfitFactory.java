@@ -56,8 +56,8 @@ public class RetorfitFactory {
                 .readTimeout(60000, TimeUnit.SECONDS)
                 .writeTimeout(60000, TimeUnit.SECONDS)
                // .addInterceptor(InterceptorUtil.HeaderInterceptor())
-                .sslSocketFactory(createSSLSocketFactory())
-                .hostnameVerifier(new TrustAllHostnameVerifier())
+//                .sslSocketFactory(createSSLSocketFactory())
+//                .hostnameVerifier(new TrustAllHostnameVerifier())
                 .retryOnConnectionFailure(false)
               //  .cache(cache)
                 .addInterceptor(new MyIntercepter())//添加日志拦截器
@@ -91,7 +91,6 @@ public class RetorfitFactory {
         if(map!=null && map.size()>0){//走post请求
             RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
             Observable<ResponseBody> observable1 = service.requestPost(path, map);
-
             observable1.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(observer);

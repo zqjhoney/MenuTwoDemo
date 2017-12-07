@@ -84,10 +84,13 @@ private int versionCode;
                 }
                 request=request.newBuilder().post(builder.build()).build();
             }
+
+            System.out.println("httpurl:"+request.url().toString()+request.body().toString());
         }
 
 //            System.out.println("开始添加公共参数44444444444" + chain.proceed(request).body().string());
 
+            System.out.print("result:"+chain.proceed(request).body().string());
             return chain.proceed(request);
 
     }

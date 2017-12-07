@@ -72,8 +72,8 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initview() {
         bind = ButterKnife.bind(this);
-        String sha1 = MapUtils.getSHA1(this);
-        System.out.println("xxxx"+sha1);
+//        String sha1 = MapUtils.getSHA1(this);
+//        System.out.println("xxxx"+sha1);
         changeImageSize();
         boolean pageboolean = getIntent().getBooleanExtra("page", false);
         mainShipin.setOnClickListener(this);

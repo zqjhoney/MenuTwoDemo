@@ -69,6 +69,7 @@ public class PhonePresenter extends BasePresenter<PhoneView> {
               //  view.failure("异常"+e);
                 Logger.init().logLevel(LogLevel.FULL).methodCount(3);
                 Logger.v("异常"+e);
+                view.hideLoading();
             }
 
             @Override

@@ -41,6 +41,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
         this.context = context;
         this.list=list;
     }
+    public  void addAll( List<VideoBean.DataBean> li){
+        list.addAll(li);
+    }
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -173,6 +176,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
     @Override
     public int getItemCount() {
         return list.size();
+        // return list.size()>0?list.size():0;
     }
     public  void onDetach(){
         play.stopPlay();

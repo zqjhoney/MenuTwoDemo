@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.zhzao.menutwodemo.MainActivity">
 
     <!--android:fitsSystemWindows="true"-->
@@ -20,7 +19,7 @@
             <RelativeLayout
                 android:id="@+id/main_head"
                 android:paddingTop="29dp"
-                android:background="#f00"
+                android:background="@color/bule"
                 android:padding="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y120">

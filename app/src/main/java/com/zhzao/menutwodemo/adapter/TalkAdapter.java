@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhzao.menutwodemo.R;
 import com.zhzao.menutwodemo.entity.TalkBean;
+import com.zhzao.menutwodemo.view.ShowView;
 
 import java.util.ArrayList;
 
@@ -120,7 +121,7 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkHolder> {
         TextView name;
         TextView time;
         CircleImageView ic;
-        ImageView show;
+        ShowView showview;
         RecyclerView gv_recyclerview;
         public TalkHolder(View itemView) {
             super(itemView);
@@ -128,7 +129,7 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkHolder> {
             name=itemView.findViewById(R.id.talk_name);
             time=itemView.findViewById(R.id.talk_time);
             ic=itemView.findViewById(R.id.talk_ic);
-            show=itemView.findViewById(R.id.show_ic);
+            showview=itemView.findViewById(R.id.showview);
             gv_recyclerview=itemView.findViewById(R.id.gv_recyclerview);
         }
     }

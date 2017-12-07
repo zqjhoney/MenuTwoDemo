@@ -9,6 +9,11 @@
         <item name="windowNoTitle">true</item>
 
     </style>
+
+    <!--<style name="AppTheme.Launcher">-->
+        <!--<item name="windowBackground">@drawable/huanghu</item>-->
+    <!--</style>-->
+
     <style name="ActivityStyle" parent="AppTheme">
         <item name="android:activityOpenEnterAnimation">@anim/top_to_bottom_in</item>//A--B  A
         <item name="android:activityOpenExitAnimation">@anim/top_to_bottom_out</item>//A--B   B

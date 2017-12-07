@@ -1,5 +1,6 @@
 package com.zhzao.menutwodemo.fragment;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -52,6 +53,7 @@ public class Sub2 extends BaseFragment implements XBanner.XBannerAdapter,ShowVid
         xRecyclerView.addHeaderView(head);
         xRecyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.VERTICAL));
         xRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        xRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         getLoadding();//git动图
     }
 
@@ -90,8 +92,8 @@ public class Sub2 extends BaseFragment implements XBanner.XBannerAdapter,ShowVid
 
     @Override
     public void success(VideoBean msg) {
-        List<VideoBean.DataBean> data = msg.getData();
-        xRecyclerView.setAdapter(new RecommendAdapter(getActivity(),data));
+//        List<VideoBean.DataBean> data = msg.getData();
+//        xRecyclerView.setAdapter(new RecommendAdapter(getActivity(),data));
     }
 
     @Override

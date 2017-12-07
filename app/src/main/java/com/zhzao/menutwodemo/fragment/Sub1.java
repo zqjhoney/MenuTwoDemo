@@ -1,5 +1,6 @@
 package com.zhzao.menutwodemo.fragment;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,7 +30,7 @@ import pl.droidsonroids.gif.GifImageView;
  * Created by 张乔君 on 2017/11/25.
  */
 
-public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVideoView {
+public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVideoView, XRecyclerView.LoadingListener, View.OnScrollChangeListener {
     @BindView(R.id.xRecyclerView)
     XRecyclerView xRecyclerView;
     @BindView(R.id.f1_wait)
@@ -38,6 +39,8 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
     private ShowVideoPresenter presenter;
     int type=1;//热门
     int page=1;//页数
+    private RecommendAdapter adapter;
+    private List<VideoBean.DataBean> data;
 
     @Override
     protected void initView() {
@@ -59,6 +62,10 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
         xRecyclerView.addHeaderView(head);
         xRecyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.VERTICAL));
         xRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+       xRecyclerView.setLoadingListener(this);
+        xRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+        //设置滑动监听
+        xRecyclerView.setOnScrollChangeListener(this);
          getLoadding();//git动图
     }
 
@@ -96,11 +103,16 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
 
     @Override
     public void success(VideoBean msg) {
-        System.out.println("xxxxxxxx推荐热门获取成功");
-        List<VideoBean.DataBean> data = msg.getData();
-        xRecyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.VERTICAL));
+        data = msg.getData();
         if(data.size()>0){
-            xRecyclerView.setAdapter(new RecommendAdapter(getActivity(),data));
+            System.out.println("xxxxxxxx推荐热门获取成功,长度"+ data.size());
+            if(adapter==null){
+                adapter = new RecommendAdapter(getActivity(), data);
+                xRecyclerView.setAdapter(adapter);
+            }else{
+                adapter.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
         }else{
             toast("集合不能为空");
         }
@@ -129,4 +141,30 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
     }
 
 
+    @Override
+    public void onRefresh() {
+        if(adapter!=null){
+            adapter=null;
+        }
+        if(data!=null){
+            data.clear();
+        }
+
+        page=1;
+        presenter.getVideo(type+"",page+"");
+        xRecyclerView.refreshComplete();
+    }
+
+    @Override
+    public void onLoadMore() {
+
+        page++;
+        presenter.getVideo(type+"",page+"");
+        xRecyclerView.loadMoreComplete();
+    }
+
+    @Override
+    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        //可以设置播放暂停什么的
+    }
 }

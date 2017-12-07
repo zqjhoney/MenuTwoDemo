@@ -65,6 +65,8 @@ public interface RetrofitHttpService {
 //    Observable<ResponseBody> upSignLoad(@Url String url, @Field("uid") String param,
 //                                        @Part List<MultipartBody.Part> parts);
 
+
+
 //    @Headers("accept:*/*")
 //    @Streaming
 //    @GET()

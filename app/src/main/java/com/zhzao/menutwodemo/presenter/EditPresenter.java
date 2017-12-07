@@ -60,14 +60,8 @@ public class EditPresenter extends BasePresenter<EditView> {
         }
         RequestBody msgBody = RequestBody.create(MediaType.parse("multipart/form-data"), msg);
         RequestBody uidBody = RequestBody.create(MediaType.parse("multipart/form-data"), uid);
-//        RequestBody sour = RequestBody.create(MediaType.parse("multipart/form-data"), "android");
-//        RequestBody app = RequestBody.create(MediaType.parse("multipart/form-data"), "101");
-//        RequestBody tok = RequestBody.create(MediaType.parse("multipart/form-data"), SharePreUtils.getShareprefervalue("token"));
         map.put("content", msgBody);//添加参数
         map.put("uid",uidBody);//添加参数
-//        map.put("token",tok);
-//        map.put("source",sour);
-//        map.put("appVersion",app);
 
         modle.getEditMsg(Api.PUBLIC, map, bodylist, new Consumer<ResponseBody>() {
             @Override
@@ -80,10 +74,5 @@ public class EditPresenter extends BasePresenter<EditView> {
                 }
             }
         });
-
-
-//
-//        view.hideLoading();
-//        Logger.getLogger("EditPresenter:s"+"异常"+e);
     }
 }
