@@ -21,6 +21,8 @@ public class MapLoadUtils  {
     public AMapLocationClient mlocationClient;
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
+    private double w;
+    private double j;
 
     public void getLoad(Context context){
         mlocationClient = new AMapLocationClient(context);
@@ -34,8 +36,9 @@ public class MapLoadUtils  {
                     if (aMapLocation.getErrorCode() == 0) {
                         //定位成功回调信息，设置相关消息
                         aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                     double w= aMapLocation.getLatitude();//获取纬度
-                     double j= aMapLocation.getLongitude();//获取经度
+                        //获取纬度
+                        w = aMapLocation.getLatitude();
+                     j= aMapLocation.getLongitude();//获取经度
                         aMapLocation.getAccuracy();//获取精度信息
                         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         Date date = new Date(aMapLocation.getTime());
@@ -52,7 +55,7 @@ public class MapLoadUtils  {
 //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
 //设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(2000);
+        mLocationOption.setInterval(60000);
 //设置定位参数
         mlocationClient.setLocationOption(mLocationOption);
 // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
@@ -63,6 +66,12 @@ public class MapLoadUtils  {
         mlocationClient.startLocation();
     }
 
+    public double getW() {
+        return w;
+    }
+    public double getJ() {
+        return j;
+    }
 
 
     public void onStop(){

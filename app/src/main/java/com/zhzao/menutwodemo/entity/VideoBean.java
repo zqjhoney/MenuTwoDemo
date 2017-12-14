@@ -60,7 +60,6 @@ public class VideoBean {
          * wid : 11
          * workDesc : fff
          */
-        public boolean xin;
         private int commentNum;
         private String cover;
         private String createTime;
@@ -76,6 +75,15 @@ public class VideoBean {
         private int wid;
         private String workDesc;
         private List<?> comments;
+        private boolean isShow=false;
+
+        public boolean isShow() {
+            return isShow;
+        }
+
+        public void setShow(boolean show) {
+            isShow = show;
+        }
 
         public int getCommentNum() {
             return commentNum;

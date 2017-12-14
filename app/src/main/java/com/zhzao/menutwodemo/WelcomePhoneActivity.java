@@ -53,11 +53,12 @@ public class WelcomePhoneActivity extends BaseActivity implements PhoneView {
     @Override
     public void initview() {
         bind = ButterKnife.bind(this);
-        Intent intent = getIntent();
-        b = intent.getBooleanExtra("sign",false);
-        unUser.setOnClickListener(this);
-        phoneLogin.setOnClickListener(this);
-        presenter = new PhonePresenter(this);
+            Intent intent = getIntent();
+            b = intent.getBooleanExtra("sign",false);
+            unUser.setOnClickListener(this);
+            phoneLogin.setOnClickListener(this);
+            presenter = new PhonePresenter(this);
+
     }
 
     @Override
@@ -83,7 +84,7 @@ public class WelcomePhoneActivity extends BaseActivity implements PhoneView {
     @Override
     public void success(String msg) {
         Gson gson = new Gson();
-        System.out.println("xxx" + msg);
+        System.out.println("xxxxxxxx"+msg);
         User user = gson.fromJson(msg, User.class);
         String token = user.getData().getToken();
         String code=user.getCode();
@@ -100,7 +101,8 @@ public class WelcomePhoneActivity extends BaseActivity implements PhoneView {
         if(b){
             finish();
         }else{
-            startActivity(new Intent(this, MainActivity.class));
+            SharePreUtils.putSharepreferBoolean("login",true);
+           iumpActivity();
         }
 
     }else{//失败
@@ -108,6 +110,12 @@ public class WelcomePhoneActivity extends BaseActivity implements PhoneView {
     }
 
 
+    }
+
+    //跳转
+    private void iumpActivity() {
+        startActivity(new Intent(this, MainActivity.class));
+        overridePendingTransition(R.anim.bottom_to_top_in,R.anim.bottom_to_top_out);
     }
 
     @Override

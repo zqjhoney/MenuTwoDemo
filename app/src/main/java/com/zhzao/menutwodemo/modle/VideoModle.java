@@ -1,6 +1,8 @@
 package com.zhzao.menutwodemo.modle;
 
 import com.igexin.sdk.PushBuildConfig;
+import com.zhzao.menutwodemo.entity.Version;
+import com.zhzao.menutwodemo.utils.MyCallback;
 import com.zhzao.menutwodemo.utils.RetorfitFactory;
 
 import java.util.List;
@@ -17,5 +19,10 @@ public class VideoModle {
 
     public void videoUpload(String path, List<MultipartBody.Part> list, Consumer<ResponseBody> consumer){
         RetorfitFactory.getInstance().uploadConsumer(path,list,consumer);
+    }
+
+    //获取版本
+    public  void getAppVersion(String path,MyCallback<Version> myCallback){
+        RetorfitFactory.getInstance().getObserver(path,null,myCallback);
     }
 }

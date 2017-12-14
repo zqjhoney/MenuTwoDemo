@@ -1,6 +1,9 @@
 package com.zhzao.menutwodemo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.zhzao.menutwodemo.Photo_shopActivity;
 import com.zhzao.menutwodemo.R;
 import com.zhzao.menutwodemo.entity.TalkBean;
 import com.zhzao.menutwodemo.view.ShowView;
@@ -24,6 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkHolder> {
     private Context context;
     private ArrayList<TalkBean.DataBean> list;
+    private Talk_subAdapter ada;
 
     public TalkAdapter(Context context,ArrayList<TalkBean.DataBean> list) {
         this.context = context;
@@ -43,68 +49,75 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkHolder> {
     }
 
     @Override
-    public void onBindViewHolder(TalkHolder holder, int position) {
+    public void onBindViewHolder(TalkHolder holder, final int position) {
         holder.name.setText(list.get(position).getUser().getNickname());
         holder.time.setText(list.get(position).getCreateTime());
         holder.content.setText(list.get(position).getContent());
 
+        if(list.get(position).isShow()){
+            holder.showview.shut();
+        }
+//        else{
+//            holder.showview.open();
+//        }
+        holder.showview.setOnClickiv(new ShowView.OnClickiv() {
+            @Override
+            public void onitem1() {
+                //评价
+            }
+
+            @Override
+            public void onitem2() {
+                //分享
+            }
+
+            @Override
+            public void onitem3() {
+                    //喜欢
+            }
+
+            @Override
+            public boolean changeBoolean() {
+                if(list.get(position).isShow()){
+                   list.get(position).setShow(false);
+                   return false;
+                }else{
+                    list.get(position).setShow(true);
+                    return  true;
+                }
+            }
+        });
+
         Glide.with(context).load(list.get(position).getUser().getIcon()).into(holder.ic);
         String imgUrls = list.get(position).getImgUrls();
-//        holder.open.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(!flag){
-//                    holder.p1.setVisibility(View.VISIBLE);
-//                    holder.p2.setVisibility(View.VISIBLE);
-//                    holder.p3.setVisibility(View.VISIBLE);
-//                    holder.open.animate().rotation(360).setDuration(200).start();
-//                    holder.open.setImageResource(R.drawable.icon_packup);
-//                    ObjectAnimator animatorConfirm = ObjectAnimator.ofFloat( holder.p1, "translationX", 0,-80);
-//                    ObjectAnimator animatorEdit = ObjectAnimator.ofFloat( holder.p2, "translationX", 0,-170);
-//                    ObjectAnimator animatorSend = ObjectAnimator.ofFloat( holder.p3, "translationX", 0,-260);
-//
-//                    AnimatorSet animatorSet = new AnimatorSet();
-//                    animatorSet.setDuration(200);
-//                    animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-//                    animatorSet.playTogether(animatorConfirm, animatorEdit, animatorSend);
-//                    animatorSet.start();
-//                    flag=true;
-//                }else{
-//                    flag=false;
-//                    holder.open.animate().rotation(0).setDuration(200).start();
-//                    holder.open.setImageResource(R.drawable.icon_open);
-//                    ObjectAnimator animatorConfirm = ObjectAnimator.ofFloat(holder.p1, "translationX",-80,0);
-//                    ObjectAnimator animatorEdit = ObjectAnimator.ofFloat(holder.p2, "translationX", -170,0);
-//                    ObjectAnimator animatorSend = ObjectAnimator.ofFloat(holder.p3, "translationX",-260,0);
-//                    AnimatorSet animatorSet = new AnimatorSet();
-//                    animatorSet.setDuration(200);
-//                    animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-//                    animatorSet.playTogether(animatorConfirm, animatorEdit, animatorSend);
-//                    animatorSet.start();
-//                    animatorSet.addListener(new AnimatorListenerAdapter() {
-//                        @Override
-//                        public void onAnimationEnd(Animator animation) {
-//                            super.onAnimationEnd(animation);
-//                            holder.p1.setVisibility(View.GONE);
-//                            holder.p2.setVisibility(View.GONE);
-//                            holder.p3.setVisibility(View.GONE);
-//                        }
-//                    });
-//
-//                }
-//            }
-//        });
+
+
         if(imgUrls==null){
         }else{
-            String[] arr=imgUrls.split("\\|");
+            final String[] arr=imgUrls.split("\\|");
             if(arr.length==4){
                 holder.gv_recyclerview.setLayoutManager(new GridLayoutManager(context,2));
             }else if(arr.length==2){
                 holder.gv_recyclerview.setLayoutManager(new GridLayoutManager(context,2));
-            }else {
+            }else if(arr.length==1){
+                holder.gv_recyclerview.setLayoutManager(new GridLayoutManager(context,1));
+            } else {
                 holder.gv_recyclerview.setLayoutManager(new GridLayoutManager(context,3));
             }
-            holder.gv_recyclerview.setAdapter(new Talk_subAdapter(context,arr));
+            ada = new Talk_subAdapter(context, arr);
+            holder.gv_recyclerview.setAdapter(ada);
+            ada.setOnItemClickListener(new Talk_subAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View v,int pos) {
+                    //跳转到展示图片页面
+                    Intent in=new Intent(context, Photo_shopActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("pos",pos);
+                    bundle.putSerializable("arr",arr);
+                    in.putExtras(bundle);
+                    context.startActivity(in);
+                }
+            });
 
         }
 
@@ -112,8 +125,9 @@ public class TalkAdapter extends RecyclerView.Adapter<TalkAdapter.TalkHolder> {
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list.size()>0?list.size():0;
     }
+
 
     class TalkHolder extends RecyclerView.ViewHolder{
 

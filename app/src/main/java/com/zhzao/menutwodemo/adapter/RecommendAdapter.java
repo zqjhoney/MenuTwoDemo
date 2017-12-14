@@ -25,6 +25,7 @@ import com.zhzao.menutwodemo.entity.VideoBean;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by 张乔君 on 2017/11/28.
@@ -32,9 +33,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHolder>{
 
-    private PlayerView play;
+   // private PlayerView play;
     private Context context;
-    private Boolean flag=false;
     private List<VideoBean.DataBean> list;
 
     public RecommendAdapter(Context context, List<VideoBean.DataBean> list) {
@@ -58,28 +58,31 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
         holder.time.setText(list.get(position).getCreateTime());
         holder.title.setText(list.get(position).getWorkDesc());
         Glide.with(context).load(list.get(position).getUser().getIcon()).into(holder.host_ic);
-        StringBuffer bf=new StringBuffer(list.get(position).getVideoUrl());
-        String substring = bf.substring(22);
-        String videourl = Api.HTTP + substring;
-        System.out.println("xxxxxxxxxxxxxxxxxx"+videourl);
+//        StringBuffer bf=new StringBuffer(list.get(position).getVideoUrl());
+//        String substring = bf.substring(22);
+//        String videourl = Api.HTTP + substring;
 
-        new PlayerView((Activity) context,holder.itemView)
-                 .setTitle("什么")
-                .setScaleType(PlayStateParams.fitparent)
-                .hideMenu(true)
-                .forbidTouch(false)
-                .showThumbnail(new OnShowThumbnailListener() {
-                    @Override
-                    public void onShowThumbnail(ImageView ivThumbnail) {
-                        Glide.with(context)
-                                .load(list.get(position).getCover())
-                                .into(ivThumbnail);
-                    }
-                })
-                .setPlaySource(videourl)
-                .startPlay();
-        //      play.stopPlay();
-
+        if(list.get(position).isShow()){
+            holder.p1.setVisibility(View.VISIBLE);
+            holder.p2.setVisibility(View.VISIBLE);
+            holder.p3.setVisibility(View.VISIBLE);
+            holder.open.setImageResource(R.drawable.icon_packup);
+            ObjectAnimator animatorConfirm = ObjectAnimator.ofFloat( holder.p1, "translationX", 0,-80);
+            ObjectAnimator animatorEdit = ObjectAnimator.ofFloat( holder.p2, "translationX", 0,-170);
+            ObjectAnimator animatorSend = ObjectAnimator.ofFloat( holder.p3, "translationX", 0,-260);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.setDuration(20);
+            animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+            animatorSet.playTogether(animatorConfirm, animatorEdit, animatorSend);
+            animatorSet.start();
+        }else{
+            holder.p1.setVisibility(View.GONE);
+            holder.p2.setVisibility(View.GONE);
+            holder.p3.setVisibility(View.GONE);
+            holder.open.setImageResource(R.drawable.icon_open);
+        }
+        holder.player.setUp(list.get(position).getVideoUrl(),"不知道");
+        Glide.with(context).load(list.get(position).getCover()).into(holder.player.ivThumb);
 
         holder.xh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +132,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
         holder.open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!flag){
+                if(!list.get(position).isShow()){
+                    list.get(position).setShow(true);
                     holder.p1.setVisibility(View.VISIBLE);
                     holder.p2.setVisibility(View.VISIBLE);
                     holder.p3.setVisibility(View.VISIBLE);
@@ -144,9 +148,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
                     animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
                     animatorSet.playTogether(animatorConfirm, animatorEdit, animatorSend);
                     animatorSet.start();
-                    flag=true;
+
                 }else{
-                    flag=false;
+                    list.get(position).setShow(false);
                     holder.open.animate().rotation(0).setDuration(200).start();
                     holder.open.setImageResource(R.drawable.icon_open);
                     ObjectAnimator animatorConfirm = ObjectAnimator.ofFloat(holder.p1, "translationX",-80,0);
@@ -168,6 +172,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
                     });
 
                 }
+
             }
         });
 
@@ -178,9 +183,12 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
         return list.size();
         // return list.size()>0?list.size():0;
     }
-    public  void onDetach(){
-        play.stopPlay();
-    }
+//    public  void onstart(){
+//        play.startPlay();
+//    }
+//    public  void onDetach(){
+//        play.stopPlay();
+//    }
 
     class MyHolder extends RecyclerView.ViewHolder{
         TextView name;
@@ -199,6 +207,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
         TextView sc1;
         TextView fx1;
         TextView pl1;
+        JCVideoPlayer player;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -221,7 +230,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyHo
 
             pl=itemView.findViewById(R.id.share_iv);
             pl1=itemView.findViewById(R.id.share_tv);
-
+            player=itemView.findViewById(R.id.videocontroller1);
 //            Log.i("xxx",getPosition()+"");
 //            itemView.setTag(list.get(getPosition()));
 

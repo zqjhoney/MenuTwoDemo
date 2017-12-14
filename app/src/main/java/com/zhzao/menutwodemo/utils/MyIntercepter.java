@@ -3,8 +3,12 @@ package com.zhzao.menutwodemo.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.orhanobut.logger.Logger;
 import com.zhzao.menutwodemo.common.App;
 
 import org.json.JSONObject;
@@ -13,7 +17,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.CacheControl;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
@@ -35,10 +41,11 @@ import okhttp3.ResponseBody;
 public class MyIntercepter implements Interceptor {
     private final String TAG = "respond";
 private int versionCode;
+    private Response response;
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        System.out.println(request.method() + "开始添加公共参数222222222");
         String token = SharePreUtils.getShareprefervalue("token");
         try {
             Context context = App.mContext;
@@ -49,12 +56,40 @@ private int versionCode;
             e.printStackTrace();
         }
 
+if("GET".equals(request.method()))
+{
+    System.out.println("开始请求参数Get");
+    HttpUrl.Builder builder = request.url().newBuilder();
 
+    builder.addQueryParameter("source","android");
+    builder.addQueryParameter("appVersion",String.valueOf(versionCode));
+    builder.addQueryParameter("token", token+"");
+    HttpUrl build = builder.build();
+    request=request.newBuilder().url(build).build();
+
+    if (NetStatus()==null){//无网络时候走缓存
+                request = request.newBuilder()
+                        .cacheControl(CacheControl.FORCE_CACHE)
+                        .build();
+    }
+    response = chain.proceed(request);
+    if (NetStatus()!=null) {// 有网络时 设置缓存超时时间为0;
+        int maxAge = 0 * 60;
+        response.newBuilder()
+                .header("Cache-Control", "public, max-age=" + maxAge)
+                .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                .build();
+    } else {
+        int maxStale = 60 * 60 * 24; // 无网络时，设置超时为1天
+        response.newBuilder()
+                .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                .removeHeader("Pragma")
+                .build();
+    }
+}
         if ("POST".equals(request.method())) {
 
-            System.out.println(request.method() + "开始添加公共参数3333333333"+request.body().toString());
             if (request.body() instanceof FormBody) {
-                System.out.println("FormBody开始添加公共参数");
                 FormBody.Builder builder = new FormBody.Builder();
                 FormBody body = (FormBody) request.body();
 
@@ -66,13 +101,11 @@ private int versionCode;
                         .add("appVersion", String.valueOf(versionCode))
                         .add("token", token+"")
                         .build();
-                System.out.println("开始添加公共参数55555" );
                 request = request.newBuilder().post(body).build();
 
             }
             else if(request.body() instanceof MultipartBody)
             {
-                System.out.println("MultipartBody开始添加公共参数");
                 MultipartBody body = (MultipartBody) request.body();
                 MultipartBody.Builder builder=new MultipartBody.Builder().setType(MultipartBody.FORM);
                 builder.addFormDataPart("source","android")
@@ -85,15 +118,20 @@ private int versionCode;
                 request=request.newBuilder().post(builder.build()).build();
             }
 
-            System.out.println("httpurl:"+request.url().toString()+request.body().toString());
+            response = chain.proceed(request);
+
         }
-
-//            System.out.println("开始添加公共参数44444444444" + chain.proceed(request).body().string());
-
-            System.out.print("result:"+chain.proceed(request).body().string());
-            return chain.proceed(request);
+     return response;
 
     }
+
+    //判断是否有网络
+    public NetworkInfo NetStatus(){
+        ConnectivityManager manager= (ConnectivityManager) App.mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        return info;
+    }
+
 
     /**
      * 添加公共参数

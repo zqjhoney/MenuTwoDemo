@@ -8,10 +8,6 @@ import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.zhzao.menutwodemo.BuildConfig;
-import com.zhzao.menutwodemo.MainActivity;
-import com.nanchen.crashmanager.CrashApplication;
-import com.nanchen.crashmanager.UncaughtExceptionHandlerImpl;
 
 /**
  * Created by 张乔君 on 2017/11/23.

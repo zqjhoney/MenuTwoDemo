@@ -3,16 +3,20 @@ package com.zhzao.menutwodemo.presenter;
 import android.os.Environment;
 
 import com.zhzao.menutwodemo.common.Api;
+import com.zhzao.menutwodemo.entity.Version;
 import com.zhzao.menutwodemo.modle.VideoModle;
+import com.zhzao.menutwodemo.utils.MyCallback;
 import com.zhzao.menutwodemo.utils.SharePreUtils;
 import com.zhzao.menutwodemo.view.VideoView;
 import com.zzhao.utils.Base.BasePresenter;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.functions.Consumer;
+import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -31,7 +35,8 @@ public class VideoPresenter extends BasePresenter<VideoView> {
         modle=new VideoModle();
     }
 
-    public void publicVideo(File files){
+    //发表视频
+    public void publicVideo(File files,double w,double j){
         String uid = SharePreUtils.getShareprefervalue("uid");
         if(uid==null || uid.equals("")){
             view.toast("uid不能为空");
@@ -45,8 +50,8 @@ public class VideoPresenter extends BasePresenter<VideoView> {
         RequestBody fs=RequestBody.create(MediaType.parse("multipart/form_data"),files);//格式
         MultipartBody.Builder builder=new MultipartBody.Builder()
                 .addFormDataPart("uid",uid)
-                .addFormDataPart("latitude",45+"")
-                .addFormDataPart("longitude",190+"")
+                .addFormDataPart("latitude",w+"")
+                .addFormDataPart("longitude",j+"")//精度
                 .addFormDataPart("videoFile",files.getName(),fs)
                 .addFormDataPart("coverFile",f.getName(),type);//封面
 
@@ -60,6 +65,30 @@ public class VideoPresenter extends BasePresenter<VideoView> {
             }
         });
 
+
+    }
+
+    //获取版本
+    public void getVersion(){
+            modle.getAppVersion(Api.Version, new MyCallback<Version>() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    view.failure("异常"+e);
+                }
+
+                @Override
+                public void onSuccess(ResponseBody responsebody, Object t) {
+                    try {
+                        view.success(responsebody.string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                }
+            });
 
     }
 }

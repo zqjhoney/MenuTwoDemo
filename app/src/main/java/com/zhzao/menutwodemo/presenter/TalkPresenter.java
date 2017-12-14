@@ -40,7 +40,6 @@ public class TalkPresenter extends BasePresenter<TalkView> {
                 @Override
                 public void onSubscribe(Disposable d) {
                 }
-
                 @Override
                 public void onNext(ResponseBody value) {
                         view.hideLoading();

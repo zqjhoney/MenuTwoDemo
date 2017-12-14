@@ -12,6 +12,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -19,6 +20,8 @@ import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
 /**
@@ -36,17 +39,23 @@ public interface RetrofitHttpService {
 //    @POST()
 //    Call<ResponseBody> post(@Url String url, @FieldMap Map<String, String> params);
 
+    @Streaming //该注解的作用是在下载大文件中使用。添加了该注解后，下载文件不会将所有的下载内容加载到内存。
+    @Headers("accept:*/*")
+    @GET()
+    Observable<ResponseBody> RequestGet(@Header("RANGE") String start, @Url String url);
 
     @Headers("accept:*/*")
     @GET()
-    Observable<ResponseBody> RequestGet(@Url String url);
-
+    Observable<ResponseBody> RequestGet( @Url String url);
     //post多参数
     @Headers("accept:*/*")
     @FormUrlEncoded
     @POST()
     Observable<ResponseBody> requestPost(@Url String url, @FieldMap Map<String, String> params);
-
+    //get多参数
+    @Headers("accept:*/*")
+    @GET()
+    Observable<ResponseBody> requestGet(@Url String url, @QueryMap Map<String, String> params);
 
     //多文件多参数
     @Headers("accept:*/*")

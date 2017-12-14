@@ -14,7 +14,11 @@ public class Api {
     public static final String UP_Photo="file/upload";//上传头像
     public static final String VIDEO_PUBLIC="quarter/publishVideo";//上传视频
     public static final String VIDEO_GET="quarter/getVideos";//获取视频
-    public static final String HTTP="http://120.27.23.105/";//获取视频
+    public static final String HTTP="http://120.27.23.105/";//获取视频的URL
+    public static final String VIDEO_HOST="quarter/getHotVideos";//获取热门视频列表
+    public static final String VIDEO_NEAR="quarter/getNearVideos";//获取附近视频列表
+    public static final String Version="quarter/getVersion";//版本更新
+
 
 
 

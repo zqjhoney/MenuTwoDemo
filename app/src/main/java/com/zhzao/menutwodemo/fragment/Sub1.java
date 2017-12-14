@@ -2,6 +2,7 @@ package com.zhzao.menutwodemo.fragment;
 
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,7 +31,7 @@ import pl.droidsonroids.gif.GifImageView;
  * Created by 张乔君 on 2017/11/25.
  */
 
-public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVideoView, XRecyclerView.LoadingListener, View.OnScrollChangeListener {
+public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVideoView, XRecyclerView.LoadingListener{
     @BindView(R.id.xRecyclerView)
     XRecyclerView xRecyclerView;
     @BindView(R.id.f1_wait)
@@ -49,23 +50,42 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
         list.add(R.drawable.raw_1500258881);
         list.add(R.drawable.raw_1500258901);
         list.add(R.drawable.raw_1500259026);
+
+
         View head = View.inflate(getActivity(), R.layout.recyclerhead, null);
         XBanner leftXbanner = head.findViewById(R.id.xbanner);
         leftXbanner.setData(list);//添加数据
         leftXbanner.setmAdapter(this);//添加适配器
+
+
+
+
         leftXbanner.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
+
+
+
         xRecyclerView.addHeaderView(head);
+
         xRecyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.VERTICAL));
         xRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
        xRecyclerView.setLoadingListener(this);
         xRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         //设置滑动监听
-        xRecyclerView.setOnScrollChangeListener(this);
+        xRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
          getLoadding();//git动图
     }
 
@@ -104,7 +124,7 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
     @Override
     public void success(VideoBean msg) {
         data = msg.getData();
-        if(data.size()>0){
+        if(data!=null&&data.size()>0){
             System.out.println("xxxxxxxx推荐热门获取成功,长度"+ data.size());
             if(adapter==null){
                 adapter = new RecommendAdapter(getActivity(), data);
@@ -114,7 +134,7 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
                 adapter.notifyDataSetChanged();
             }
         }else{
-            toast("集合不能为空");
+            toast(msg.getMsg());
         }
 
 
@@ -161,10 +181,14 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
         page++;
         presenter.getVideo(type+"",page+"");
         xRecyclerView.loadMoreComplete();
+        xRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        });
     }
 
-    @Override
-    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-        //可以设置播放暂停什么的
-    }
+
+
+
+
+
+
 }

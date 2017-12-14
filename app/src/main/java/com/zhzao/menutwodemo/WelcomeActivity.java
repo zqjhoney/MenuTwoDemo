@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.igexin.sdk.PushManager;
 import com.zhzao.menutwodemo.service.DemoIntentService;
 import com.zhzao.menutwodemo.service.DemoPushService;
+import com.zhzao.menutwodemo.utils.SharePreUtils;
 import com.zzhao.utils.Base.BaseActivity;
 
 import butterknife.BindView;
@@ -31,7 +32,11 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void initview() {
         ButterKnife.bind(this);
-    //    setTheme(R.style.ActivityStyle);
+        setTheme(R.style.AppTheme);
+        boolean login = SharePreUtils.getSharepreferBooleanvalue("login");
+        if(login){
+            startActivity(new Intent(this,MainActivity.class));
+        }
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoPushService.class);
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
         other.setOnClickListener(this);

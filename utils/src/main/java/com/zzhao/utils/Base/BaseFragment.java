@@ -44,6 +44,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if(mRootView==null){
             mRootView = View.inflate(mActivity,setLayoutView(),null);
                    // inflater.inflate(setLayoutView(), container, false);
+            bind = ButterKnife.bind(this, mRootView);
         }
             // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         ViewGroup parent = (ViewGroup) mRootView.getParent();
@@ -51,14 +52,14 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         {
             parent.removeView(mRootView);
         }
-        bind = ButterKnife.bind(this, mRootView);
+
         return mRootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData(getArguments());//有创参数的时候
+        initData(getArguments());//有传参数的时候
         initView();
         initData();
 
@@ -67,7 +68,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     /**
      * @param arguments 接收到的从其他地方传递过来的参数
      */
-    protected  void initData(Bundle arguments){};
+    protected  void initData(Bundle arguments){}
     /**
      * 初始化View
      */

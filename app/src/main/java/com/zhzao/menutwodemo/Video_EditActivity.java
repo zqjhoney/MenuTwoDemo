@@ -54,6 +54,7 @@ public class Video_EditActivity extends BaseActivity implements VideoView {
     private int maxSelectNum = 2;
     private ArrayList<File> files;
     private VideoPresenter presenter;
+    private MapLoadUtils map;
 
     @Override
     public Boolean isFull() {
@@ -150,12 +151,14 @@ public class Video_EditActivity extends BaseActivity implements VideoView {
                 break;
             case R.id.video_public://发表
 
-                MapLoadUtils map=new MapLoadUtils();
-            map.getLoad(Video_EditActivity.this);
+                map = new MapLoadUtils();
+                 map.getLoad(Video_EditActivity.this);
+                double w = map.getW();//纬度
+                double j = map.getJ();//精度
                 if (selectList != null && selectList.size() > 0) {
                     if (selectList.size() == 1) {
                         File file = new File(selectList.get(0).getPath());
-                        presenter.publicVideo(file);
+                        presenter.publicVideo(file,w,j);
                     } else {
                         toast("一次衹能上传一个视频");
                     }
@@ -165,6 +168,12 @@ public class Video_EditActivity extends BaseActivity implements VideoView {
                 break;
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        map.onStop();//定位停止
     }
 
     @Override

@@ -65,6 +65,15 @@ public class TalkBean {
         private Object shareNum;
         private int uid;
         private UserBean user;
+        private boolean isShow=false;
+
+        public boolean isShow() {
+            return isShow;
+        }
+
+        public void setShow(boolean show) {
+            isShow = show;
+        }
 
         public Object getCommentNum() {
             return commentNum;

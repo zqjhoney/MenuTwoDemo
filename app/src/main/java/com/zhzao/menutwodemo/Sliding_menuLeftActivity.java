@@ -1,17 +1,27 @@
 package com.zhzao.menutwodemo;
 
 import android.content.DialogInterface;
-import android.content.IntentFilter;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zhzao.menutwodemo.entity.Version;
+import com.zhzao.menutwodemo.presenter.VideoPresenter;
+import com.zhzao.menutwodemo.utils.SharePreUtils;
+import com.zhzao.menutwodemo.view.VideoView;
 import com.zzhao.utils.Base.BaseActivity;
 import com.zzhao.utils.utils.ToastShow;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -20,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class Sliding_menuLeftActivity extends BaseActivity {
+public class Sliding_menuLeftActivity extends BaseActivity implements VideoView{
 
 
     @BindView(R.id.back_back)
@@ -37,7 +47,11 @@ public class Sliding_menuLeftActivity extends BaseActivity {
     TextView versonName;
     @BindView(R.id.cache)
     TextView cache;
+    @BindView(R.id.pre_back)
+    Button preBack;
     private Unbinder bind;
+    private int versionCode;
+    private VideoPresenter presenter;
 
     @Override
     public Boolean isFull() {
@@ -57,33 +71,32 @@ public class Sliding_menuLeftActivity extends BaseActivity {
         ideaBack.setOnClickListener(this);
         aboutProject.setOnClickListener(this);
         clearCache.setOnClickListener(this);
+        preBack.setOnClickListener(this);
 
+        presenter = new VideoPresenter(this);
         initversion();
         initCache();
     }
 
     private void initCache() {//初始化计算缓存的大小
-        long filesize=0;
-        filesize+=getDirSize(getCacheDir());//缓存的大小
-        filesize+=getDirSize(getFilesDir());//文件大小
+        long filesize = 0;
+        filesize += getDirSize(getCacheDir());//缓存的大小
+        filesize += getDirSize(getFilesDir());//文件大小
         cache.setText(formatFileSize(filesize));
     }
 
     private long getDirSize(File file) {//计算传来文件的大小
-        if(file == null){
+        if (file == null) {
             return 0;
         }
-//        if(!file.isDirectory()){//如果不是文件夹
-//            return 0;
-//        }
-        long cacheLong=0;
-         File[] files= file.listFiles();
+        long cacheLong = 0;
+        File[] files = file.listFiles();
         for (File file1 : files) {
-            if(file1.isFile()){//如果是文件
-                cacheLong+=file1.length();
-            }else if(file1.isDirectory()){
-                cacheLong+=file1.length();//计算
-                cacheLong+=getDirSize(file1); //在次调用递归
+            if (file1.isFile()) {//如果是文件
+                cacheLong += file1.length();
+            } else if (file1.isDirectory()) {
+                cacheLong += file1.length();//计算
+                cacheLong += getDirSize(file1); //在次调用递归
             }
         }
         return cacheLong;
@@ -96,7 +109,8 @@ public class Sliding_menuLeftActivity extends BaseActivity {
         try {
             PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
             String versionName = info.versionName;
-            versonName.setText("V"+versionName);
+            versionCode = info.versionCode;
+            versonName.setText("V" + versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -127,7 +141,7 @@ public class Sliding_menuLeftActivity extends BaseActivity {
                 versionBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ToastShow.showToast(Sliding_menuLeftActivity.this,"走版本更新逻辑");
+                   //     presenter.getVersion();
                     }
                 });
 
@@ -145,7 +159,7 @@ public class Sliding_menuLeftActivity extends BaseActivity {
                 clearBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                    //清除缓存
+                        //清除缓存
                         clearCaches();
                     }
                 });
@@ -158,7 +172,18 @@ public class Sliding_menuLeftActivity extends BaseActivity {
             case R.id.idea_back://意见反馈
 
                 break;
+            case R.id.per_back:
+                SharePreUtils.removeShareprefer("uid");
+                SharePreUtils.removeShareprefer("login");
+                startActivity(new Intent(Sliding_menuLeftActivity.this,WelcomeActivity.class));
+
+                break;
+
         }
+
+    }
+
+    private void updataVersion() {
 
     }
 
@@ -169,29 +194,64 @@ public class Sliding_menuLeftActivity extends BaseActivity {
         clearCaches(getCacheDir());//清除cache目录下缓存
         clearCaches(getFilesDir());//清除files目录下缓存
         //清除Shareprefrence
-        File file=new File("/data/data"+getPackageName()+"/shared_prefs");
+        File file = new File("/data/data" + getPackageName() + "/shared_prefs");
         clearCaches(file);
         cache.setText("0 B");
     }
 
-    public void clearCaches(File dir){
+    public void clearCaches(File dir) {
 
-        if(dir!=null && dir.isDirectory()){
+        if (dir != null && dir.isDirectory()) {
 
             //得到该目录下所有文件
             File[] f = dir.listFiles();
             //遍历删除该目录下所有文件
-            if (f!=null&&f.length>0){
+            if (f != null && f.length > 0) {
                 for (File file1 : f) {
                     //删除方法
                     file1.delete();
                 }
             }
-            ToastShow.showToast(Sliding_menuLeftActivity.this,"清除成功");
+            ToastShow.showToast(Sliding_menuLeftActivity.this, "清除成功");
         }
     }
+
     @Override
     public void success(String msg) {
+        try {
+            JSONObject oo=new JSONObject(msg);
+            if(oo.optInt("code")==0){
+                JSONObject data = oo.getJSONObject("data");
+                String url=data.getString("apkUrl");
+                int  newVersionCode= Integer.parseInt(data.optString("versionCode"));
+                String newVersionName=data.optString("versionName");
+
+                if(versionCode <= newVersionCode){
+                    File file=new File(Environment.getExternalStorageDirectory()+"/version/app.apk");
+
+                           if(file != null && file.exists()){
+                               install(file);
+                         //    走安装逻辑
+                           }else{
+                          //     下载逻辑
+                            download();
+                         }
+                }
+            }else{
+                toast("Sliding_menuLeftActivity:"+oo.optString("msg"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //开始下载
+    private void download() {
+        //最简单
+        // todo 要修改成retrofit+Rxjava
+
+
 
     }
 
@@ -211,9 +271,24 @@ public class Sliding_menuLeftActivity extends BaseActivity {
     }
 
     @Override
+    public void toast(String msg) {
+        ToastShow.showToast(Sliding_menuLeftActivity.this,msg);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         bind.unbind();
+    }
+    /**
+     * 安装新版本
+     */
+    private void install(File file) {
+        //调用系统安装器
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.parse("file://" + file.getAbsolutePath()), "application/vnd.android.package-archive");
+        startActivity(intent);
     }
 
 
@@ -237,4 +312,6 @@ public class Sliding_menuLeftActivity extends BaseActivity {
         }
         return fileSizeString;
     }
+
+
 }

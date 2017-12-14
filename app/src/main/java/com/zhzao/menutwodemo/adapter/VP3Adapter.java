@@ -1,11 +1,10 @@
 package com.zhzao.menutwodemo.adapter;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.zhzao.menutwodemo.fragment.Sub1;
-import com.zhzao.menutwodemo.fragment.Sub2;
 import com.zhzao.menutwodemo.fragment.VideoSub1;
 import com.zhzao.menutwodemo.fragment.VideoSub2;
 

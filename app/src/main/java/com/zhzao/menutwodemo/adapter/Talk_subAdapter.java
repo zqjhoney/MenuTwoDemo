@@ -32,9 +32,17 @@ public class Talk_subAdapter extends RecyclerView.Adapter<Talk_subAdapter.SubHol
     }
 
     @Override
-    public void onBindViewHolder(SubHolder holder, int position) {
+    public void onBindViewHolder(SubHolder holder, final int position) {
         RequestOptions option = new RequestOptions().placeholder(R.drawable.ic_empty).error(R.drawable.ic_error);
         Glide.with(context).load(list[position]).apply(option).into(holder.iv);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(v,position);
+            }
+        });
+
+
     }
     @Override
     public int getItemCount() {
@@ -47,5 +55,13 @@ public class Talk_subAdapter extends RecyclerView.Adapter<Talk_subAdapter.SubHol
             super(itemView);
             iv=itemView.findViewById(R.id.other_photo);
         }
+    }
+
+    private OnItemClickListener onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+    public interface OnItemClickListener{
+        void onItemClick(View v,int pos);
     }
 }

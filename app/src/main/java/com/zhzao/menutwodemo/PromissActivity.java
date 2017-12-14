@@ -24,7 +24,6 @@ public class PromissActivity  extends AppCompatActivity{
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
                         != PackageManager.PERMISSION_GRANTED){
-
             ActivityCompat.requestPermissions(this,new String[]{
                     Manifest.permission.INTERNET},INTERNET_CODE);
 

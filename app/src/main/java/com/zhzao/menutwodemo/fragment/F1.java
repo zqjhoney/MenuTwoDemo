@@ -1,11 +1,16 @@
 package com.zhzao.menutwodemo.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import com.zhzao.menutwodemo.R;
 import com.zhzao.menutwodemo.adapter.VPadapter;
+import com.zhzao.menutwodemo.view.MyScrollView;
 import com.zzhao.utils.Base.BaseFragment;
 
 import butterknife.BindView;
@@ -32,14 +37,25 @@ public class F1 extends BaseFragment {
 
     @Override
     protected void initData() {
+
+//        ViewTreeObserver observer = f1Tablayout.getViewTreeObserver();
+//        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                设置透明渐变等效果
+//            }
+//        });
     }
+
     @Override
     protected void click(View v) {
     }
+
     @Override
     protected int setLayoutView() {
         return R.layout.f1;
     }
+
 
 
 

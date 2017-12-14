@@ -90,6 +90,8 @@ dependencies {
     compile 'com.github.nanchen2251:AppManager:1.0.1'
     //播放视频
     compile 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
+    //jiecao
+    compile 'fm.jiecao:jiecaovideoplayer:2.0'
 
 //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
     compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
@@ -103,7 +105,12 @@ dependencies {
     compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
     //地图值实现定位
     compile 'com.amap.api:location:latest.integration'
-
+    //phototview
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    //主页底部好看的按钮
+    compile 'com.ashokvarma.android:bottom-navigation-bar:0.9.5'
+    //nationBottom
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.2.0'
 
 
 }

@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.zhzao.menutwodemo.common.Api;
 import com.zhzao.menutwodemo.service.RetrofitHttpService;
 import com.zhzao.menutwodemo.trustbooks.TrustAllCerts;
-import com.zhzao.menutwodemo.trustbooks.TrustAllHostnameVerifier;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class RetorfitFactory {
 //                .sslSocketFactory(createSSLSocketFactory())
 //                .hostnameVerifier(new TrustAllHostnameVerifier())
                 .retryOnConnectionFailure(false)
-              //  .cache(cache)
+                .cache(cache)
                 .addInterceptor(new MyIntercepter())//添加日志拦截器
                 .build();
         //添加gson转换器
@@ -90,11 +89,10 @@ public class RetorfitFactory {
     public void getObserver(String path, Map<String,String> map,Observer<ResponseBody> observer){
         if(map!=null && map.size()>0){//走post请求
             RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
-            Observable<ResponseBody> observable1 = service.requestPost(path, map);
+            Observable<ResponseBody> observable1 = service.requestGet(path, map);
             observable1.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(observer);
-
         }else{//get请求
             RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
             Observable<ResponseBody> observable1 = service.RequestGet(path);
@@ -109,7 +107,7 @@ public class RetorfitFactory {
     public void getObserver(String path, Map<String,String> map, final MyCallback callback){
         if(map!=null && map.size()>0){//走post请求
             RetrofitHttpService service = mRetrofit.create(RetrofitHttpService.class);
-            Observable<ResponseBody> observable1 = service.requestPost(path, map);
+            Observable<ResponseBody> observable1 = service.requestGet(path, map);
 
             observable1.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())

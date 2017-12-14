@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhzao.menutwodemo">
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- iBeancon功能所需权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -18,8 +18,8 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
         android:name=".common.App"
@@ -45,16 +45,19 @@
         <meta-data
             android:name="Mob-AppSecret"
             android:value="c3a62c3cb60bb9830733f3fd709ca0e5" />
-
         //地图定位
-        <service android:name="com.amap.api.location.APSService"></service>
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="e1be1eaf9fdded6b59d399f997d196ce">
-        </meta-data>
+        <service android:name="com.amap.api.location.APSService" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="e1be1eaf9fdded6b59d399f997d196ce" />
+
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/ActivityStyle">
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -66,17 +69,18 @@
             android:process=":pushservice" />
         <service android:name=".service.DemoIntentService" />
 
-        <activity
-            android:name=".WelcomePhoneActivity"
-            android:theme="@style/ActivityStyle" />
+        <activity android:name=".WelcomePhoneActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Sliding_menuLeftActivity" />
         <activity android:name=".Sliding_menuRightActivity" />
         <activity android:name=".EditTalkActivity" />
         <activity android:name=".EditOverActivity" />
         <activity android:name=".Video_EditActivity" />
-        <activity android:name=".Per_Msg_Activity"></activity>
-        <activity android:name=".photoutils.ClipImageActivity"/>
+        <activity android:name=".Per_Msg_Activity" />
+        <activity android:name=".photoutils.ClipImageActivity" />
+        <activity android:name=".Photo_shopActivity" />
+        <activity android:name=".BottomActivity" />
+        <activity android:name=".Video_Host_DesActivity"></activity>
     </application>
 
 </manifest>
