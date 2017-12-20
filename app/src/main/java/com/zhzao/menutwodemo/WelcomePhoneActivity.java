@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.entity.User;
 import com.zhzao.menutwodemo.presenter.PhonePresenter;
 import com.zhzao.menutwodemo.utils.SharePreUtils;

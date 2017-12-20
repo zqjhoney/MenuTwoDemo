@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.zhzao.menutwodemo.R;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.adapter.VideoHostAdapter;
 import com.zhzao.menutwodemo.entity.VideoHost;
 import com.zhzao.menutwodemo.presenter.VideoDescPresenter;

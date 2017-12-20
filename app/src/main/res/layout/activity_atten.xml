@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.zhzao.menutwodemo.AttenActivity">
+    <!--android:fitsSystemWindows="true"-->
+    <!--android:clipToPadding="true"-->
+    <RelativeLayout
+        android:paddingTop="30dp"
+        android:id="@+id/atten_head"
+        android:background="@color/bg_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y130">
+        <TextView
+            android:layout_marginLeft="@dimen/x20"
+            android:text="〈 返回"
+            android:textSize="18dp"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:text="我的关注"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:text=" 热门关注"
+            android:textSize="18dp"
+            android:layout_marginRight="@dimen/x20"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ListView
+        android:layout_below="@+id/atten_head"
+        android:id="@+id/atten_lv"
+        android:divider="@color/Grey_800"
+        android:dividerHeight="@dimen/y2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+</RelativeLayout>

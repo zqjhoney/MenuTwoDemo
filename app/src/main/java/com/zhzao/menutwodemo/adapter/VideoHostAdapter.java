@@ -9,15 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.zhzao.menutwodemo.R;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.Video_Host_DesActivity;
 import com.zhzao.menutwodemo.entity.VideoHost;
 
 import java.io.Serializable;
-import java.security.acl.Group;
 import java.util.ArrayList;
-
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by 张乔君 on 2017/12/10.
@@ -48,7 +45,7 @@ public class VideoHostAdapter extends RecyclerView.Adapter<VideoHostAdapter.MyHo
     }
 
     @Override
-    public void onBindViewHolder(final MyHostHolder holder, int position) {
+    public void onBindViewHolder(final MyHostHolder holder, final int position) {
         //随机值
         ViewGroup.LayoutParams params=holder.iv.getLayoutParams();
         params.height=getRandomHeight();
@@ -63,8 +60,9 @@ public class VideoHostAdapter extends RecyclerView.Adapter<VideoHostAdapter.MyHo
 //                  i= holder.getLayoutPosition();
 //                onItemClickListener.onItemCllick(v,i);
                 Intent in=new Intent(context, Video_Host_DesActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("person", (Serializable) list.get(holder.getLayoutPosition()));
+                VideoHost.DataBean bean = list.get(position);
+                in.putExtra("videoUrl",bean.getVideoUrl());
+                in.putExtra("img",list.get(position).getCover());
                 context.startActivity(in);
 
             }

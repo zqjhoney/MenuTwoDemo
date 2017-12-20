@@ -8,6 +8,7 @@ import com.orhanobut.logger.Logger;
 import com.zhzao.menutwodemo.common.Api;
 import com.zhzao.menutwodemo.modle.PhoneModle;
 import com.zhzao.menutwodemo.utils.SharePreUtils;
+import com.zhzao.menutwodemo.utils.StringUtils;
 import com.zhzao.menutwodemo.view.PhoneView;
 import com.zzhao.utils.Base.BasePresenter;
 import com.zzhao.utils.utils.ToastShow;
@@ -35,7 +36,6 @@ public class PhonePresenter extends BasePresenter<PhoneView> {
         map=new HashMap<>();
     }
 
-
     //登录方法
     public void login(String phone,String pwd){
         if(TextUtils.isEmpty(phone)){
@@ -46,7 +46,17 @@ public class PhonePresenter extends BasePresenter<PhoneView> {
             view.toast("密码不能为空");
             return;
         }
-
+        //TODO
+        boolean b = StringUtils.checkUserName(phone);
+        if(!b){
+            view.toast("请输入正确手机号码");
+            return;
+        }
+        boolean b1 = StringUtils.checkPassword(pwd);
+        if(!b1){
+            view.toast("输入的密码不合规则");
+            return;
+        }
         map.put("mobile",phone);
         map.put("password",pwd);
         view.showLoading();

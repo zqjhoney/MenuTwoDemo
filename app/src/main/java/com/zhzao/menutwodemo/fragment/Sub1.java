@@ -10,14 +10,17 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.luck.picture.lib.decoration.RecycleViewDivider;
+import com.onetime.platform.R;
 import com.stx.xhb.xbanner.XBanner;
-import com.zhzao.menutwodemo.R;
 import com.zhzao.menutwodemo.adapter.RecommendAdapter;
 import com.zhzao.menutwodemo.entity.VideoBean;
 import com.zhzao.menutwodemo.presenter.ShowVideoPresenter;
 import com.zhzao.menutwodemo.view.ShowVideoView;
 import com.zzhao.utils.Base.BaseFragment;
 import com.zzhao.utils.utils.ToastShow;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -133,6 +136,7 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
                 adapter.addAll(data);
                 adapter.notifyDataSetChanged();
             }
+
         }else{
             toast(msg.getMsg());
         }
@@ -142,6 +146,11 @@ public class Sub1 extends BaseFragment implements XBanner.XBannerAdapter, ShowVi
 
     @Override
     public void failure(String msg) {
+
+    }
+
+    @Override
+    public void success(String msg) {
 
     }
 

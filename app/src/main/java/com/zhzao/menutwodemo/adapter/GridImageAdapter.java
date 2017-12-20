@@ -21,7 +21,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.tools.DateUtils;
 import com.luck.picture.lib.tools.DebugUtil;
 import com.luck.picture.lib.tools.StringUtils;
-import com.zhzao.menutwodemo.R;
+import com.onetime.platform.R;
 
 import java.io.File;
 import java.util.ArrayList;

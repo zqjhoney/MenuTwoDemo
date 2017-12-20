@@ -17,6 +17,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.luck.picture.lib.tools.PictureFileUtils;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.adapter.FullyGridLayoutManager;
 import com.zhzao.menutwodemo.adapter.GridImageAdapter;
 import com.zhzao.menutwodemo.presenter.VideoPresenter;
@@ -165,14 +166,14 @@ public class Video_EditActivity extends BaseActivity implements VideoView {
                 } else {
                     toast("发表的视频不能为空");
                 }
+                onMapStop();//停止定位
                 break;
         }
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+
+    protected void onMapStop(){
         map.onStop();//定位停止
     }
 

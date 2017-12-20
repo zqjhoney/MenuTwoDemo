@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,6 +31,16 @@ public class PromissActivity  extends AppCompatActivity{
 
         }else{
             //不需要查询的时候进行的操作
+
+            new Runnable(){
+                @Override
+                public void run() {
+                    Looper.prepare();
+                    Handler handler=new Handler(Looper.myLooper());
+                    Looper.loop();
+
+                }
+            };
         }
     }
 

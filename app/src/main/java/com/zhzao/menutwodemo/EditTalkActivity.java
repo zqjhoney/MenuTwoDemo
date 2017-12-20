@@ -1,8 +1,6 @@
 package com.zhzao.menutwodemo;
 
-import android.*;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,6 +23,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.luck.picture.lib.tools.PictureFileUtils;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.adapter.FullyGridLayoutManager;
 import com.zhzao.menutwodemo.adapter.GridImageAdapter;
 import com.zhzao.menutwodemo.presenter.EditPresenter;
@@ -217,12 +216,12 @@ public class EditTalkActivity extends BaseActivity implements EditView {
         }
     }
 
-    private void backkeys() {
+    private void backkeys() {//缩回键盘
         InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);//键盘
         if(imm != null) {
             imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(),0);
         }
-    }//缩回键盘
+    }
 
     private void jumpActivity() {
         Intent intent = new Intent(this, WelcomePhoneActivity.class);

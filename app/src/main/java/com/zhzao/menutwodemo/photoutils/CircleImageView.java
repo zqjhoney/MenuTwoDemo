@@ -37,7 +37,7 @@ import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.zhzao.menutwodemo.R;
+import com.onetime.platform.R;
 
 
 /**

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.onetime.platform.R;
 import com.zzhao.utils.Base.BaseActivity;
 
 import butterknife.BindView;

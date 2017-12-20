@@ -12,7 +12,8 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.zhzao.menutwodemo.R;
+
+import com.onetime.platform.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import java.util.Map;
  */
 
 public class PermissionUtils {
+
     private static final String TAG = PermissionUtils.class.getSimpleName();
     public static final int CODE_RECORD_AUDIO = 0;
     public static final int CODE_GET_ACCOUNTS = 1;

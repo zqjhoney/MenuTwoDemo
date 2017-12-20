@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.igexin.sdk.PushManager;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.service.DemoIntentService;
 import com.zhzao.menutwodemo.service.DemoPushService;
 import com.zhzao.menutwodemo.utils.SharePreUtils;
@@ -77,6 +78,5 @@ public class WelcomeActivity extends BaseActivity {
     public void hideLoading() {
 
     }
-
 
 }

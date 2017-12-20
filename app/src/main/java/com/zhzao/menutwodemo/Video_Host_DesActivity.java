@@ -1,17 +1,21 @@
 package com.zhzao.menutwodemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.zhzao.menutwodemo.entity.VideoHost;
+import com.bumptech.glide.Glide;
+import com.onetime.platform.R;
 import com.zzhao.utils.Base.BaseActivity;
-import com.zzhao.utils.utils.ToastShow;
 
-import java.io.Serializable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 public class Video_Host_DesActivity extends BaseActivity {
 
+
+    @BindView(R.id.f3_jcv)
+    JCVideoPlayer f3Jcv;
 
     @Override
     public Boolean isFull() {
@@ -25,9 +29,12 @@ public class Video_Host_DesActivity extends BaseActivity {
 
     @Override
     public void initview() {
-        Bundle extras = getIntent().getExtras();
-        VideoHost.DataBean person = (VideoHost.DataBean) extras.getSerializable("person");
-        ToastShow.showToast(this,person.getUser().getNickname());
+        ButterKnife.bind(this);
+        String videoUrl = getIntent().getStringExtra("videoUrl");
+        String img=getIntent().getStringExtra("img");
+        f3Jcv.setUp(videoUrl,"随便");
+        System.out.println("xxxxxx"+videoUrl);
+        Glide.with(this).load(img).into(f3Jcv.ivThumb);
 
     }
 
@@ -60,4 +67,5 @@ public class Video_Host_DesActivity extends BaseActivity {
     public void hideLoading() {
 
     }
+
 }

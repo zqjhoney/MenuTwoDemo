@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zhzao.menutwodemo.R;
+
+import com.onetime.platform.R;
 
 import java.io.File;
 import java.io.IOException;

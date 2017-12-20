@@ -1,5 +1,13 @@
 apply plugin: 'com.android.application'
 android {
+    signingConfigs {
+        dubug {
+            keyAlias 'onetime'
+            keyPassword 'onetime1507c'
+            storeFile file('D:/jks/onetime.jks')
+            storePassword 'onetime1507c'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.zhzao.menutwodemo"
@@ -33,84 +41,111 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
-
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
+
     //dex依赖包
     compile 'com.android.support:multidex:1.0.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':utils')
     compile 'com.getui:sdk:2.11.1.0'
+
     //SMS
+
     //    compile name: 'SMSSDK-3.0.0', ext: 'aar'
+
     //    compile name: 'SMSSDKGUI-3.0.0', ext: 'aar'
     compile 'com.tencent.bugly:crashreport:latest.release'
+
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
+
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
+
     //leakCannary
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
+
     //leakCannary
+
     //butterknife
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.android.support:design:27.0.1'
-
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     // implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'//Retrofit2所需要的包
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'//ConverterFactory的Gson依赖包
-    compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'//ConverterFactory的String依赖包
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
 
+    //Retrofit2所需要的包
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+
+    //ConverterFactory的Gson依赖包
+    compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
+
+    //ConverterFactory的String依赖包
     compile 'com.xhb:xbanner:1.0.0'
     compile 'com.github.bumptech.glide:glide:3.6.1'
-
     compile 'com.orhanobut:logger:1.15'
     compile 'com.jcodecraeer:xrecyclerview:1.3.2'
     compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
+
     //圆角图片
     compile 'de.hdodenhof:circleimageview:2.2.0'
 
     //相册
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
+
     //加载gif动图
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+
     //完美崩溃
     compile 'com.github.nanchen2251:AppManager:1.0.1'
+
     //播放视频
     compile 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
+
     //jiecao
     compile 'fm.jiecao:jiecaovideoplayer:2.0'
 
-//对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
+    //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
     compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
+
     //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.0'
     compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
+
     //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.6.0'
     compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
+
     //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.0'
     compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
+
     //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.6.0'
     compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
+
     //地图值实现定位
     compile 'com.amap.api:location:latest.integration'
+
     //phototview
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
+
     //主页底部好看的按钮
     compile 'com.ashokvarma.android:bottom-navigation-bar:0.9.5'
+
     //nationBottom
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.2.0'
 
+    //瀑布流卡片样式
+    compile 'com.android.support:cardview-v7:22.2.1'
 
 }

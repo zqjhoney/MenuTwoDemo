@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.entity.TalkBean;
 import com.zzhao.utils.Base.BaseActivity;
 import com.zzhao.utils.utils.ToastShow;

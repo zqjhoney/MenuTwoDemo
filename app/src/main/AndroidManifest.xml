@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zhzao.menutwodemo">
+    package="com.onetime.platform">
 
     <!-- iBeancon功能所需权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -22,7 +22,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
-        android:name=".common.App"
+        android:name="com.zhzao.menutwodemo.common.App"
         android:allowBackup="true"
         android:icon="@drawable/t"
         android:label="@string/app_name"
@@ -30,6 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- 友盟分享 -->
         <!-- 替换为在友盟后台申请的应用Appkey -->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -53,7 +54,7 @@
             android:value="e1be1eaf9fdded6b59d399f997d196ce" />
 
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.zhzao.menutwodemo.WelcomeActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,24 +64,47 @@
         </activity>
         //个推
         <service
-            android:name=".service.DemoPushService"
+            android:name="com.zhzao.menutwodemo.service.DemoPushService"
             android:exported="true"
             android:label="PushService"
             android:process=":pushservice" />
-        <service android:name=".service.DemoIntentService" />
+        <service android:name="com.zhzao.menutwodemo.service.DemoIntentService" />
+        /分享
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-        <activity android:name=".WelcomePhoneActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Sliding_menuLeftActivity" />
-        <activity android:name=".Sliding_menuRightActivity" />
-        <activity android:name=".EditTalkActivity" />
-        <activity android:name=".EditOverActivity" />
-        <activity android:name=".Video_EditActivity" />
-        <activity android:name=".Per_Msg_Activity" />
-        <activity android:name=".photoutils.ClipImageActivity" />
-        <activity android:name=".Photo_shopActivity" />
-        <activity android:name=".BottomActivity" />
-        <activity android:name=".Video_Host_DesActivity"></activity>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name="com.zhzao.menutwodemo.WelcomePhoneActivity" />
+        <activity android:name="com.zhzao.menutwodemo.MainActivity" />
+        <activity android:name="com.zhzao.menutwodemo.Sliding_menuLeftActivity" />
+        <activity android:name="com.zhzao.menutwodemo.Sliding_menuRightActivity" />
+        <activity android:name="com.zhzao.menutwodemo.EditTalkActivity" />
+        <activity android:name="com.zhzao.menutwodemo.EditOverActivity" />
+        <activity android:name="com.zhzao.menutwodemo.Video_EditActivity" />
+        <activity android:name="com.zhzao.menutwodemo.Per_Msg_Activity" />
+        <activity android:name="com.zhzao.menutwodemo.photoutils.ClipImageActivity" />
+        <activity android:name="com.zhzao.menutwodemo.Photo_shopActivity" />
+        <activity android:name="com.zhzao.menutwodemo.BottomActivity" />
+        <activity android:name="com.zhzao.menutwodemo.Video_Host_DesActivity" />
+        <activity android:name="com.zhzao.menutwodemo.Per_homepage_Activity" />
+        <activity android:name="com.zhzao.menutwodemo.AttenActivity" />
+        <activity android:name="com.zhzao.menutwodemo.Video_PerDescActivity" />
+        <activity android:name="com.zhzao.menutwodemo.chat.SingleChatActivity" />
+        <activity android:name="com.zhzao.menutwodemo.chat.LoginChatActivity"></activity>
     </application>
 
 </manifest>

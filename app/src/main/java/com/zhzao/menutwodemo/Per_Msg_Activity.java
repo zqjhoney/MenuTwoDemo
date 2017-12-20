@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.entity.UserInfo;
 import com.zhzao.menutwodemo.photoutils.ClipImageActivity;
 import com.zhzao.menutwodemo.photoutils.FileUtil;
@@ -30,6 +31,7 @@ import com.zhzao.menutwodemo.presenter.Per_presenter;
 import com.zhzao.menutwodemo.utils.SharePreUtils;
 import com.zhzao.menutwodemo.view.PerView;
 import com.zzhao.utils.Base.BaseActivity;
+import com.zzhao.utils.BuildConfig;
 import com.zzhao.utils.utils.ToastShow;
 
 import org.json.JSONException;

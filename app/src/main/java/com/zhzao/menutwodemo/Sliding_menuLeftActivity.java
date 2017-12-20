@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.entity.Version;
 import com.zhzao.menutwodemo.presenter.VideoPresenter;
 import com.zhzao.menutwodemo.utils.SharePreUtils;
@@ -72,7 +72,6 @@ public class Sliding_menuLeftActivity extends BaseActivity implements VideoView{
         aboutProject.setOnClickListener(this);
         clearCache.setOnClickListener(this);
         preBack.setOnClickListener(this);
-
         presenter = new VideoPresenter(this);
         initversion();
         initCache();
@@ -172,11 +171,10 @@ public class Sliding_menuLeftActivity extends BaseActivity implements VideoView{
             case R.id.idea_back://意见反馈
 
                 break;
-            case R.id.per_back:
+            case R.id.pre_back:
                 SharePreUtils.removeShareprefer("uid");
                 SharePreUtils.removeShareprefer("login");
                 startActivity(new Intent(Sliding_menuLeftActivity.this,WelcomeActivity.class));
-
                 break;
 
         }

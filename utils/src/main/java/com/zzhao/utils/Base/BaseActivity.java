@@ -29,8 +29,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     }
 
-
-
     public void setFull(boolean hasFocus){
         if (hasFocus && Build.VERSION.SDK_INT >= 19) {
             View decorView = getWindow().getDecorView();

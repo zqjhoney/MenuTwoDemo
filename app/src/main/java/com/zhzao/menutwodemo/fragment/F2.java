@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.zhzao.menutwodemo.R;
+import com.onetime.platform.R;
 import com.zhzao.menutwodemo.adapter.TalkAdapter;
 import com.zhzao.menutwodemo.entity.TalkBean;
 import com.zhzao.menutwodemo.presenter.TalkPresenter;

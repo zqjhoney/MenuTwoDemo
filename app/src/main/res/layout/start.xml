@@ -56,7 +56,6 @@
         android:layout_below="@+id/start_head">
 
         <RelativeLayout
-            android:clickable="true"
             android:background="@drawable/waterview_item"
             android:layout_width="match_parent"
             android:layout_height="47dp"

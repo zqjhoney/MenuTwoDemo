@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.reactivex.functions.Consumer;
 import okhttp3.Call;
 import okhttp3.ResponseBody;
 
@@ -60,6 +61,21 @@ public class ShowVideoPresenter extends BasePresenter<ShowVideoView> {
             }
         });
 
+    }
+
+    //获取关注信息
+    public void getAtten(String uid){
+        if(TextUtils.isEmpty(uid)){
+            view.toast("uid不能为空");
+            return;
+        }
+        map.put("uid",uid);
+        modle.getAttenMsg(Api.Get_FollowUSER, map, new Consumer<ResponseBody>() {
+            @Override
+            public void accept(ResponseBody responseBody) throws Exception {
+                view.success(responseBody.string());
+            }
+        });
 
 
 

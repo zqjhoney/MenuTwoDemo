@@ -15,11 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.zhzao.menutwodemo.common.App;
+import com.onetime.platform.R;
+import com.umeng.socialize.UMShareAPI;
 import com.zhzao.menutwodemo.fragment.F1;
 import com.zhzao.menutwodemo.fragment.F2;
 import com.zhzao.menutwodemo.fragment.F3;
-import com.zhzao.menutwodemo.utils.MapUtils;
 import com.zhzao.menutwodemo.utils.SharePreUtils;
 import com.zzhao.utils.Base.BaseActivity;
 
@@ -59,6 +59,8 @@ public class MainActivity extends BaseActivity {
     CircleImageView mainLeft;
     @BindView(R.id.start_name)
     TextView startName;
+    @BindView(R.id.rl_left1)
+    RelativeLayout rlLeft1;
     private F1 f1;
     private F2 f2;
     private F3 f3;
@@ -83,6 +85,7 @@ public class MainActivity extends BaseActivity {
         shezhi.setOnClickListener(this);
         mainRight.setOnClickListener(this);
         startPhoto.setOnClickListener(this);
+        rlLeft1.setOnClickListener(this);
 
         f1 = new F1();
         f2 = new F2();
@@ -162,9 +165,11 @@ public class MainActivity extends BaseActivity {
             case R.id.start_photo:
                 startActivity(new Intent(this, Per_Msg_Activity.class));
                 break;
+            case R.id.rl_left1://关注
+                startActivity(new Intent(this, AttenActivity.class));
+                break;
 
         }
-
 
     }
 
@@ -205,13 +210,6 @@ public class MainActivity extends BaseActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @Override
     public Boolean isFull() {
         return false;
     }
@@ -220,5 +218,11 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         bind.unbind();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

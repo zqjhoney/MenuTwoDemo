@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.zhzao.menutwodemo.R;
+import com.onetime.platform.R;
 import com.zzhao.utils.Base.BaseFragment;
 
 import butterknife.BindView;

@@ -1,6 +1,7 @@
 package com.zhzao.menutwodemo.utils;
 
 import android.os.Environment;
+import android.os.Handler;
 
 import com.google.gson.Gson;
 import com.zhzao.menutwodemo.common.Api;
@@ -27,6 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.Cache;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
@@ -61,6 +63,7 @@ public class RetorfitFactory {
                 .cache(cache)
                 .addInterceptor(new MyIntercepter())//添加日志拦截器
                 .build();
+
         //添加gson转换器
         //添加rxjava转换器
         mRetrofit = new Retrofit.Builder()

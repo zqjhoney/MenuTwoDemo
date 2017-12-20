@@ -20,7 +20,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.zhzao.menutwodemo.R;
+
+import com.onetime.platform.R;
 
 import java.io.IOException;
 

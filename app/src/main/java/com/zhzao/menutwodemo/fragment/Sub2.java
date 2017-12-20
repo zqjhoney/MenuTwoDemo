@@ -8,9 +8,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.luck.picture.lib.decoration.RecycleViewDivider;
+import com.onetime.platform.R;
 import com.stx.xhb.xbanner.XBanner;
-import com.zhzao.menutwodemo.R;
-import com.zhzao.menutwodemo.adapter.RecommendAdapter;
 import com.zhzao.menutwodemo.entity.VideoBean;
 import com.zhzao.menutwodemo.presenter.ShowVideoPresenter;
 import com.zhzao.menutwodemo.view.ShowVideoView;
@@ -98,6 +97,11 @@ public class Sub2 extends BaseFragment implements XBanner.XBannerAdapter,ShowVid
 
     @Override
     public void failure(String msg) {
+
+    }
+
+    @Override
+    public void success(String msg) {
 
     }
 

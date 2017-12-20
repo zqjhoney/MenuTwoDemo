@@ -9,7 +9,7 @@
         android:paddingLeft="@dimen/x14"
         android:id="@+id/talk_head"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y90">
+        android:layout_height="@dimen/y110">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/talk_ic"
             android:layout_centerVertical="true"
@@ -36,15 +36,77 @@
             android:text="2017-05-23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <com.zhzao.menutwodemo.view.ShowView
-            android:id="@+id/showview"
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/photo11"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/x80"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/y115">
+            <ImageView
+                android:id="@+id/report1"
+                android:src="@drawable/d_dx"
+                android:layout_width="@dimen/x70"
+                android:layout_height="@dimen/y70" />
+
+            <TextView
+                android:textSize="@dimen/x25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/report1"
+                android:layout_centerHorizontal="true"
+                android:text="123" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/photo21"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_width="@dimen/x430"
-            android:layout_height="wrap_content">
+            android:layout_width="@dimen/x105"
+            android:layout_height="@dimen/y115">
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/host_open2"
+                android:src="@drawable/d_fx"
+                android:layout_width="@dimen/x70"
+                android:layout_height="@dimen/y70" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/host_open2"
+                android:text="222"
+                android:textSize="@dimen/x23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
-        </com.zhzao.menutwodemo.view.ShowView>
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/photo31"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y115">
+            <ImageView
+                android:id="@+id/host_open3"
+                android:src="@drawable/d_xx"
+                android:layout_width="@dimen/x70"
+                android:layout_height="@dimen/y70" />
+            <TextView
+                android:textSize="@dimen/x25"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/host_open3"
+                android:text="111"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/host_open1"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_open"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y70" />
     </RelativeLayout>
+
     <TextView
         android:id="@+id/talk_content"
         android:layout_marginTop="@dimen/y10"

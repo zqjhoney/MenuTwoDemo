@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhzao.menutwodemo.chat.SingleChatActivity">
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/y5"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:imeOptions="actionSend"/>
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_send_pressed"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:text="发送"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -9,6 +9,7 @@ import com.zhzao.menutwodemo.entity.VideoBean;
 public interface ShowVideoView {
     void success(VideoBean msg);
     void failure(String msg);
+    void  success(String msg);
 
     void showLoading();
     void hideLoading();

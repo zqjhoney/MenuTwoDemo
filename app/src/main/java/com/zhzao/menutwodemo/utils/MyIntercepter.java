@@ -64,6 +64,7 @@ if("GET".equals(request.method()))
     builder.addQueryParameter("source","android");
     builder.addQueryParameter("appVersion",String.valueOf(versionCode));
     builder.addQueryParameter("token", token+"");
+    System.out.println("xxxxxxxxxxxtoken"+token);
     HttpUrl build = builder.build();
     request=request.newBuilder().url(build).build();
 

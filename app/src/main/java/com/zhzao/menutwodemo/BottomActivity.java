@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.onetime.platform.R;
 
 public class BottomActivity extends AppCompatActivity {
 

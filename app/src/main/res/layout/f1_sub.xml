@@ -3,6 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/f1_wait"
         android:src="@drawable/t"
@@ -10,11 +16,6 @@
         android:layout_centerInParent="true"
         android:layout_width="@dimen/x350"
         android:layout_height="@dimen/y350" />
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/xRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.jcodecraeer.xrecyclerview.XRecyclerView>
 
 
 </RelativeLayout>

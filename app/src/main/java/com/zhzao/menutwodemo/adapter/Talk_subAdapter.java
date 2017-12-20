@@ -8,9 +8,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.zhzao.menutwodemo.R;
-
-import java.util.ArrayList;
+import com.onetime.platform.R;
 
 /**
  * Created by 张乔君 on 2017/11/30.
